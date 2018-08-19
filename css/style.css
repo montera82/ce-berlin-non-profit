@@ -879,7 +879,7 @@ a {
 }
 
 section {
-	padding: 130px 0;
+	padding: 50px 0;
 	overflow: hidden;
 }
 
@@ -3043,7 +3043,7 @@ header nav.navbar.bootsnav ul.nav.white-link > li > a, nav.navbar.white-link .he
 }
 
 header.sticky nav.navbar-fixed-top.header-light-transparent.white-link .navbar-nav > li > a, header.sticky nav.navbar-fixed-top.header-light-transparent.white-link .header-searchbar a, header.sticky nav.navbar-fixed-top.header-light-transparent.white-link .header-social-icon a, header.sticky nav.navbar-fixed-top.header-light.white-link .navbar-nav > li > a, header.sticky nav.navbar-fixed-top.header-light.white-link .header-searchbar a, header.sticky nav.navbar-fixed-top.header-light.white-link .header-social-icon a, header.sticky nav.navbar-fixed-top.header-light.white-link .header-menu-button a, header.sticky nav.navbar-fixed-top.header-light.white-link .header-menu-button a {
-	color: #232323;
+	color: #ffffff;
 }
 
 header .logo .logo-dark, header .logo .logo-light {
@@ -3835,7 +3835,7 @@ header.sticky nav.header-dark-transparent .mobile-toggle:hover span, header.stic
 
 /* light navigation */
 header.header-appear nav.header-light, header.sticky nav.navbar-fixed-top.header-light, header.sticky nav.navbar-scroll-fixed-top.header-light {
-	background-color: #ffffff;
+	background-color: #5b2a96;
 	box-shadow: 0 5px 10px -10px rgba(0, 0, 0, 0.6);
 }
 

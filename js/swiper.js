@@ -203,7 +203,7 @@ function bindAnimePreset( el, params ) {
 		},
 		'swiperSlideRide': function () {
 			el.animeReset = function () {
-				this.style.transform = 'translateX(0) scale(1.2)';
+				//this.style.transform = 'translateX(0) scale(1.2)';
 			};
 			el.animeStart = function ( direction ) {
 				anime({
