@@ -9,8 +9,6 @@ app.set('view engine', 'handlebars');
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function (req, res) {
-    res.render('home');
-});
+require('app/routes/routes').setup(app);
 
 app.listen(3001);

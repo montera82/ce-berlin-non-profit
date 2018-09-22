@@ -8,13 +8,17 @@ WORKDIR /src/app
 # where available (npm@5+)
 COPY package.json ./
 
+# Install all the dependencies in package.json
 RUN npm install
-# If you are building your code for production
-# RUN npm install --only=production
+
+# Install nodemon to enable live reloading of source code
+RUN npm install -g nodemon
 
 # Bundle app source
 COPY . .
 
 # Expose internal application port
 EXPOSE 3001
-CMD [ "npm", "start" ]
+
+# Run the application
+CMD [ "nodemon", "server.js" ]
