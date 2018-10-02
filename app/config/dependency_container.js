@@ -11,8 +11,9 @@ let RhapsodyService = require('app/services/rhapsody_realities');
  */
 serviceLocator.register('rhapsodyController', (serviceLocator) => {
     let rhapsodyService = serviceLocator.get('rhapsodyService');
+    let logger = serviceLocator.get('logger');
 
-    return new RhapsodyController(rhapsodyService);
+    return new RhapsodyController(rhapsodyService, logger);
 });
 
 /**
@@ -21,9 +22,8 @@ serviceLocator.register('rhapsodyController', (serviceLocator) => {
 serviceLocator.register('rhapsodyService', (serviceLocator) => {
 
     let logger = serviceLocator.get('logger');
-    let esClient = serviceLocator.get('esClient');
 
-    return new RhapsodyService(logger, esClient);
+    return new RhapsodyService(logger);
 });
 
 /**
