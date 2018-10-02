@@ -46,11 +46,11 @@
                     <button class="navbar-toggle collapsed pull-right" type="button" data-toggle="collapse" data-target="#navbar-collapse-toggle-1"><span class="sr-only">toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
                     <div class="navbar-collapse collapse pull-right" id="navbar-collapse-toggle-1">
                         <ul class="nav navbar-nav navbar-left panel-group no-margin text-font-sec text-bold">
-                            <li><a class="inner-link" href="/" title="Home">Home</a></li>
+                            <li><a class="inner-link {{#compare menuActive '==' 'home'}}active{{/compare}}" href="/" title="Home">Home</a></li>
                             <li><a class="inner-link" href="/church_service" title="About">Church Service</a></li>
                             <li><a class="inner-link" href="/kings_pay" title="Portfolio">Kings Pay</a></li>
                             <li><a class="inner-link" href="/pcdl_online" title="testimonials">PCDL Online</a></li>
-                            <li><a class="inner-link" href="/rhapsody-realities" title="blog">Rhapsody of Realities</a></li>
+                            <li><a class="inner-link {{#compare menuActive '==' 'rhapsody'}}active{{/compare}}" href="/rhapsody-realities" title="blog">Rhapsody of Realities</a></li>
                             <!--<li><a class="inner-link" href="#contacts" title="Contact">Healing school</a></li>-->
                         </ul>
                     </div>

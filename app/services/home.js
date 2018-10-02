@@ -1,9 +1,10 @@
 'use strict';
 
-class RhapsodyService {
+class HomeService {
 
     /**
-     * Rhapsody
+     * Home
+     *
      * service constructor
      *
      * @constructor
@@ -14,11 +15,11 @@ class RhapsodyService {
     }
 
     /**
-     * Lists all rhapsodies
+     * Lists all
      */
     list() {
         //todo definition of method that will list all 
     }
 }
 
-module.exports = RhapsodyService;
+module.exports = HomeService;
