@@ -1,7 +1,7 @@
 var config = require('app/config/config');
 
 var dbConfig = {
-    client: 'posgres',
+    client: 'pg',
     connection: config.posgres.connection,
     pool: config.posgres.pool,
     migrations: {
