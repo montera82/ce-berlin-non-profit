@@ -1,4 +1,4 @@
-var config = require('app/config/config');
+var config = require('./app/config/config');
 
 var dbConfig = {
     client: 'pg',
