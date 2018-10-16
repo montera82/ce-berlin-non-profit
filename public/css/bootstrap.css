@@ -2487,10 +2487,22 @@ fieldset[disabled] a.btn {
   border-color: #007bff;
 }
 
+.btn-purple {
+  color: #fff;
+  background-color: #523d94;
+  border-color: #523d94;
+}
+
 .btn-primary:hover {
   color: #fff;
   background-color: #0069d9;
   border-color: #0062cc;
+}
+
+.btn-purple:hover {
+  color: #fff;
+  background-color: #523d94;
+  border-color: #523d94;
 }
 
 .btn-primary:focus, .btn-primary.focus {

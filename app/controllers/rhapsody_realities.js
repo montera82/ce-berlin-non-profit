@@ -39,6 +39,23 @@ class RhapsodyController {
 
         res.render('admin_add_rhapsody', {layout : 'admin_main'});
     }
+
+     /**
+     * rhapsody create
+     *
+     * @param req
+     * @param res
+     */
+    create(req, res) {
+
+        let viewData = {
+            menuActive: 'rhapsody'
+        };
+
+        //call the rhapsody service here to fetch rhapsodies from the DB e.t.c before redendering content
+        res.render('add_rhapsody_form', viewData);
+        
+    }
 }
 
 module.exports = RhapsodyController;

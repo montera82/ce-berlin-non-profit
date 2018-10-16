@@ -14,11 +14,11 @@ let config = {
     },
     posgres: {
         connection: {
-            host: process.env.DB_HOST || '0.0.0.0',
-            port: process.env.DB_PORT || '5430',
-            database: process.env.POSTGRES_DB || 'church',
-            user: process.env.POSTGRES_USER || 'church',
-            password: process.env.POSTGRES_PASSWORD || 'church',
+            host: process.env.DB_HOST || 'postgres',
+            port: process.env.DB_PORT || '5432',
+            database: process.env.POSTGRES_DB,
+            user: process.env.POSTGRES_USER,
+            password: process.env.POSTGRES_PASSWORD,
             debug: process.env.DATABASE_DEBUG ? ['ComQueryPacket'] : false
         },
         pool: {
