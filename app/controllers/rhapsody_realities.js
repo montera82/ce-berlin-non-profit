@@ -35,21 +35,35 @@ class RhapsodyController {
      * @param req
      * @param res 
      */
-    addNew(req, res) {
+    addNewView(req, res) {
 
-        res.render('admin_add_rhapsody', {layout : 'admin_main'});
+        res.render('admin_add_rhapsody', { layout: 'admin_main' });
     }
 
-     /**
-     * rhapsody list
-     *
-     * @param req
-     * @param res
-     */
+    save(req, res, next) {
+        let body = req.body;
+
+       return this.rhapsodyService.createRhapsody(body)
+            .then(() => {
+                req.flash('success', 'saved successfully!')
+                res.render('admin_add_rhapsody', { layout: 'admin_main' });
+            })
+            .catch((err) => {
+                req.flash('error', 'saving failed!')
+                res.render('admin_add_rhapsody', { layout: 'admin_main' });
+            });
+    }
+
+    /**
+    * rhapsody list
+    *
+    * @param req
+    * @param res
+    */
     list(req, res) {
-        
-        res.render('admin_list_rhapsody', {layout : 'admin_main'});
-        
+
+        res.render('admin_list_rhapsody', { layout: 'admin_main' });
+
     }
 }
 

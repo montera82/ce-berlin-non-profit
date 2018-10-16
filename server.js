@@ -1,6 +1,8 @@
 let express = require('express');
 let exphbs = require('express-handlebars');
 let path = require('path');
+let bodyParser = require('body-parser');
+let session = require('express-session');
 
 let app = express();
 let serviceLocator = require('app/config/dependency_container');
@@ -15,7 +17,23 @@ app.engine('handlebars', exphbs({
 
 app.set('view engine', 'handlebars');
 
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//flash messages
+app.use(require('connect-flash')());
+app.use(function(req, res, next) {
+    res.locals.messages = require('express-messages')(req, res);
+    next();
+});
+app.set('trust proxy', 1) // trust first proxy
+app.use(session({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }
+}))
 
 require('app/routes/routes').setup(app, serviceLocator);
 
