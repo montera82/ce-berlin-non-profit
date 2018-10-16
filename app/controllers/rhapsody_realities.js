@@ -39,6 +39,18 @@ class RhapsodyController {
 
         res.render('admin_add_rhapsody', {layout : 'admin_main'});
     }
+
+     /**
+     * rhapsody list
+     *
+     * @param req
+     * @param res
+     */
+    list(req, res) {
+        
+        res.render('admin_list_rhapsody', {layout : 'admin_main'});
+        
+    }
 }
 
 module.exports = RhapsodyController;
