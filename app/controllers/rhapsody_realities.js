@@ -41,7 +41,7 @@ class RhapsodyController {
     }
 
      /**
-     * rhapsody create
+     * rhapsody list
      *
      * @param req
      * @param res
