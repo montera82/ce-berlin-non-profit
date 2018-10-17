@@ -2,6 +2,7 @@
 
 let Rhapsody = require('app/models/rhapsody');
 let Bookshelf = require('app/bookshelf');
+let Paginator = require('app/lib/paginator');
     
 class RhapsodyService {
 
@@ -54,7 +55,7 @@ class RhapsodyService {
         });
     }
 
-    ValidateRhapsodyData(req){
+    validateRhapsodyData(req){
         // Form Data Validation
         req.checkBody('title', 'Title field is required').notEmpty();
         req.checkBody('opening_verse', 'Opening verse field is required').notEmpty();
@@ -67,6 +68,50 @@ class RhapsodyService {
 
         return req.validationErrors();
     }
+
+    listRhapsodies (req, res) {
+        var query = req.query;
+    
+        var page, per_page, skip = null, limit = null, paginator = null;
+    
+        page = Number(query.page || 2);
+        per_page = Number(query.per_page || 2);
+    
+        paginator = new Paginator(page, per_page);
+    
+        limit = paginator.getLimit();
+        skip = paginator.getOffset();
+    
+        return new Rhapsody()
+            .query(function (qb) {
+                qb.limit(limit).offset(skip);
+            })
+            .fetchAll()
+            .then(rhapsodies => {
+                return new Rhapsody()
+                .query()
+                .count()
+                .then(count => {
+                    count = count[0]['count(*)'];
+    
+                    return {
+                        count: count,
+                        rows: rhapsodies
+                    };
+                });
+            }, err => {
+                throw err;
+            }).then(result => {
+
+                var count = result.count;
+                var items = result.rows;
+    
+                paginator.setCount(count);
+                paginator.setData(items);
+    
+                return paginator.getPaginator();
+            });
+    };
 }
 
 module.exports = RhapsodyService;

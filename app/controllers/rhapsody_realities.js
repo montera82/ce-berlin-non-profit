@@ -44,7 +44,7 @@ class RhapsodyController {
         let body = req.body;
 
         // Validate Form Input
-        let error = this.rhapsodyService.ValidateRhapsodyData(req);
+        let error = this.rhapsodyService.validateRhapsodyData(req);
         if (error) {
             this.logger.error('Validation Error: ', error);
             let errorMessages = error.map( item => item.msg );
@@ -71,7 +71,14 @@ class RhapsodyController {
     */
     list(req, res) {
 
-        res.render('admin_list_rhapsody', { layout: 'admin_main' });
+        return this.rhapsodyService.listRhapsodies(req, res)
+                .then( paginatedRhasodies => {
+                    res.send(paginatedRhasodies);
+                })
+                .catch( err => {
+                    throw err;
+                });
+        // res.render('admin_list_rhapsody', { layout: 'admin_main' });
 
     }
 }

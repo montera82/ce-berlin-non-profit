@@ -4,7 +4,7 @@ var _ = require('underscore');
 
 function Paginator (page, perPage) {
     this.currentPage = (!_.isNumber(page) ? Number(page) : page) || 1;
-    this.perPage = (!_.isNumber(perPage) ? Number(perPage) : perPage) || 4;
+    this.perPage = (!_.isNumber(perPage) ? Number(perPage) : perPage) || 10;
     this.lastPage = 0;
     this.data = [];
 
