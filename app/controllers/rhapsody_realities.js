@@ -43,15 +43,24 @@ class RhapsodyController {
     save(req, res, next) {
         let body = req.body;
 
-       return this.rhapsodyService.createRhapsody(body)
-            .then(() => {
-                req.flash('success', 'saved successfully!')
-                res.render('admin_add_rhapsody', { layout: 'admin_main' });
-            })
-            .catch((err) => {
-                req.flash('error', 'saving failed!')
-                res.render('admin_add_rhapsody', { layout: 'admin_main' });
-            });
+        // Validate Form Input
+        let error = this.rhapsodyService.ValidateRhapsodyData(req);
+        if (error) {
+            this.logger.error('Validation Error: ', error);
+            let errorMessages = error.map( item => item.msg );
+            req.flash('error', errorMessages[0]);
+            res.render('admin_add_rhapsody', { layout: 'admin_main'});
+        }
+
+        return this.rhapsodyService.createRhapsody(body)
+                .then(() => {
+                    req.flash('success', 'saved successfully!')
+                    res.render('admin_add_rhapsody', { layout: 'admin_main' });
+                })
+                .catch((err) => {
+                    req.flash('error', 'saving failed!')
+                    res.render('admin_add_rhapsody', { layout: 'admin_main' });
+                });
     }
 
     /**

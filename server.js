@@ -3,6 +3,7 @@ let exphbs = require('express-handlebars');
 let path = require('path');
 let bodyParser = require('body-parser');
 let session = require('express-session');
+let expressValidator = require('express-validator');
 
 let app = express();
 let serviceLocator = require('app/config/dependency_container');
@@ -34,6 +35,9 @@ app.use(session({
   saveUninitialized: true,
   cookie: { secure: true }
 }))
+
+//form validation
+app.use(expressValidator());
 
 require('app/routes/routes').setup(app, serviceLocator);
 
