@@ -31,6 +31,14 @@ class RhapsodyService {
     createRhapsody(data) {
         let rhapsody = {};
         rhapsody.title = data.title;
+        rhapsody.opening_verse = data.opening_verse;
+        rhapsody.body = data.body;
+        rhapsody.confession = data.confession;
+        rhapsody.further_scripture = data.further_scripture;
+        rhapsody.one_year_bible_plan = data.one_year_bible_plan;
+        rhapsody.date = data.date;
+        rhapsody.lang = data.lang;
+
 
         return Bookshelf.transaction(trx => {
             return new Rhapsody().save(rhapsody, { method: 'insert', transacting: trx })

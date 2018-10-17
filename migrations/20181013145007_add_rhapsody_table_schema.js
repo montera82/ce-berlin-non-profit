@@ -5,10 +5,10 @@ exports.up = function (knex, Promise) {
         if (!exists) {
             return knex.schema.createTable('rhapsody', function (table) {
                 table.bigincrements('id').primary();
-                table.string('title', 100);
+                table.string('title');
                 table.string('opening_verse');
                 table.text('body');
-                table.string('confession');
+                table.text('confession');
                 table.string('further_scripture');
                 table.string('one_year_bible_plan');
                 table.date('date');
