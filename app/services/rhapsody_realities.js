@@ -37,7 +37,7 @@ class RhapsodyService {
         rhapsody.further_scripture = data.further_scripture;
         rhapsody.one_year_bible_plan = data.one_year_bible_plan;
         rhapsody.date = data.date;
-        // rhapsody.lang = data.lang;
+        rhapsody.lang = data.lang;
 
 
         return Bookshelf.transaction(trx => {
@@ -63,6 +63,7 @@ class RhapsodyService {
         req.checkBody('further_scripture', 'Further Scripture field is required').notEmpty();
         req.checkBody('one_year_bible_plan', 'One year bible plan field is required').notEmpty();
         req.checkBody('date', 'Date field is required').notEmpty();
+        req.checkBody('lang', 'Language field is required').notEmpty();
 
         return req.validationErrors();
     }

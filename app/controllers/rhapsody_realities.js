@@ -48,7 +48,7 @@ class RhapsodyController {
         if (error) {
             this.logger.error('Validation Error: ', error);
             let errorMessages = error.map( item => item.msg );
-            req.flash('error', errorMessages[0]);
+            req.flash('error', errorMessages);
             res.render('admin_add_rhapsody', { layout: 'admin_main'});
         }
 
