@@ -27,7 +27,7 @@ let config = {
         }
     }, 
     pagination: {
-        default_limit: 2,
+        default_limit: 10,
         default_offset: 0,
         max_limit: 50
     },

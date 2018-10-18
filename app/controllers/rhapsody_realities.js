@@ -80,7 +80,6 @@ class RhapsodyController {
         this.rhapsodyService.listRhapsodies(params)
             .then(data => {
                 
-                this.logger.info(data);
                 viewData.rhapsodies = data.rhapsodies;
                 viewData.pagination = data.pagination;
                 res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
