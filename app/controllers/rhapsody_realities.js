@@ -79,8 +79,9 @@ class RhapsodyController {
                 viewData.pagination = data.pagination;
                 res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
             })
-            .catch(err => {
-                throw err;
+            .catch(() => {
+                res.flash('error', 'There was an error retrieving rhapsodies, Please try again');
+                res.render('admin_add_rhapsody', { viewData, layout: 'admin_main' });
             });
     }
 }
