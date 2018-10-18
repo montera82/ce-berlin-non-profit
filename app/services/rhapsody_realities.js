@@ -4,7 +4,7 @@ let Rhapsody = require('app/models/rhapsody');
 let Bookshelf = require('app/bookshelf');
 let paginator = require('app/lib/paginator');
 paginator = new paginator();
-    
+
 class RhapsodyService {
 
     /**
@@ -41,13 +41,13 @@ class RhapsodyService {
                     return rhapsody;
                 })
                 .catch(err => {
-                    this.logger.error('failed to create rhapsody', err);
+                    this.logger.error('failed to create rhapsody', err.message);
                     throw new errors.UnknownError('an error occurred');
                 });
         });
     }
 
-    validateRhapsodyData(req){
+    validateRhapsodyData(req) {
         req.checkBody('title', 'Title field is required').notEmpty();
         req.checkBody('opening_verse', 'Opening verse field is required').notEmpty();
         req.checkBody('body', 'Body field is required').notEmpty();
@@ -63,21 +63,21 @@ class RhapsodyService {
     /**
      * Lists all rhapsodies
      */
-    listRhapsodies (params) {
+    listRhapsodies(params) {
         let pagination = {};
         let pages = paginator.getPagination(params);
 
         return new Rhapsody()
-            .query()   
+            .query()
             .count()
-            .then( count => {
+            .then(count => {
                 pages.total = count[0].count;
                 return new Rhapsody().query(qb => {
                     qb.limit(pages.limit).offset(pages.offset);
                 }).fetchAll();
             })
             .then(rhapsodies => {
-                this.logger.info('successfully fetched Rhasodies');
+                this.logger.info('successfully fetched Rhapsodies');
                 pagination = paginator.paginate({
                     limit: pages.limit,
                     offset: pages.offset,
@@ -89,10 +89,25 @@ class RhapsodyService {
                 };
             })
             .catch(err => {
-                this.logger.error('failed to fetch Rhasodies ', err.message);
+                this.logger.error('failed to fetch Rhapsodies ', err.message);
                 throw new errors.UnknownError('an unknown error occurred');
             });
     };
+
+    /**
+     * Lists all rhapsodies
+     */
+    getRhapsody(rhapsodyId) {
+        return new Rhapsody({ id: rhapsodyId }).fetch()
+            .then(rhapsody => {
+                this.logger.info('Successfully fetched rhapsody');
+                return rhapsody.toJSON();
+            })
+            .catch(err => {
+                this.logger.info('Failed to fetch rhapsody', err.message);
+                throw new error.UnknownError('an unknown error occured');
+            })
+    }
 }
 
 module.exports = RhapsodyService;

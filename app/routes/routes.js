@@ -15,5 +15,5 @@ module.exports.setup = function setup(app, serviceLocator) {
     app.get('/admin/add-rhapsody-realities',  (req, res, next) => rhapsodyController.addNewView(req, res, next));
     app.post('/admin/add-rhapsody-realities',(req, res, next) => rhapsodyController.save(req, res, next));
     app.get('/admin/list-rhapsody-realities',  (req, res, next) => rhapsodyController.list(req, res, next));
-    app.get('/admin/edit-rhapsody-realities',  (req, res, next) => rhapsodyController.edit(req, res, next));
+    app.get('/admin/edit-rhapsody-realities/:id',  (req, res, next) => rhapsodyController.editView(req, res, next));
 };

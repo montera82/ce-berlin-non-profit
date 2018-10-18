@@ -59,7 +59,7 @@
                                     <div class="col-md-9">
                                         <div class="dl">
                                             <select name="lang" class="custom-select">
-                                                <option value="en">English</option>
+                                                <option value={{viewData.rhapsody.lang}}>{{viewData.rhapsody.lang}}</option>
                                             </select>
                                         </div>
                                     </div>
@@ -67,68 +67,72 @@
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Title</label>
                                     <div class="col-md-9">
-                                        <input name="title" type="text" class="form-control">
+                                        <input name="title" type="text" value="{{viewData.rhapsody.title}}" class="form-control">
                                         <small class="form-control-feedback"> Enter the title of the rhapsody here
                                         </small> </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Opening Verse</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="opening_verse" class="form-control">
+                                        <input type="text" name="opening_verse" value="{{viewData.rhapsody.opening_verse}}"
+                                            class="form-control">
                                         <small class="form-control-feedback"> Enter the opening verse of the rhapsody</small>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Body</label>
                                     <div class="col-md-9">
-                                        <textarea type="text" name="body" class="form-control" rows="8"></textarea>
+                                        <textarea type="text" name="body" class="form-control" rows="8">{{viewData.rhapsody.body}}</textarea>
                                         <small class="form-control-feedback"> Enter the body of the rhapsody</small>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Confession</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="confession" class="form-control">
+                                        <input type="text" name="confession" value="{{viewData.rhapsody.confession}}"
+                                            class="form-control">
                                         <small class="form-control-feedback"> Enter the confession of the rhapsody</small>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Further Scripture</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="further_scripture" class="form-control">
+                                        <input type="text" name="further_scripture" value="{{viewData.rhapsody.further_scripture}}"
+                                            class="form-control">
                                         <small class="form-control-feedback"> Enter the further scripture of the
                                             rhapsody</small> </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">One Year Bible Plan</label>
                                     <div class="col-md-9">
-                                        <input type="text" name="one_year_bible_plan" class="form-control">
+                                        <input type="text" name="one_year_bible_plan" value="{{viewData.rhapsody.one_year_bible_plan}}"
+                                            class="form-control">
                                         <small class="form-control-feedback"> Enter the one year bible plan of the
                                             rhapsody</small> </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Date</label>
                                     <div class="col-md-9">
-                                        <input type="date" name="date" class="form-control">
+                                        <input id="rhapsodyDate" type="date" name="date" class="form-control">
                                         <small class="form-control-feedback"> Enter the date of the rhapsody</small>
                                     </div>
                                 </div>
-                                </div>
-                                <div class="form-actions">
-                                    <div class="row">
-                                        <div class="col-md-12" style="padding:20px">
-                                            <div class="row">
-                                                <div class="offset-sm-3 col-md-9">
-                                                    <button type="submit" name="save&stay" class="btn btn-success"> <i
-                                                            class="fa fa-check"></i>Save & Stay</button>
-                                                    <button type="button" name="save&exit" class="btn btn-success">Save
-                                                        & Exit</button>
-                                                    <button type="button" name="cancel" class="btn btn-info">Cancel</button>
-                                                </div>
+                            </div>
+                            <div class="form-actions">
+                                <div class="row">
+                                    <div class="col-md-12" style="padding:20px">
+                                        <div class="row">
+                                            <div class="offset-sm-3 col-md-9">
+                                                <button type="submit" name="save&stay" class="btn btn-success"> <i
+                                                        class="fa fa-check"></i>Save & Stay</button>
+                                                <button type="button" name="save&exit" class="btn btn-success">Save
+                                                    & Exit</button>
+                                                <button type="button" name="cancel" class="btn btn-info">Cancel</button>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </form>
                     </div>
                 </div>
