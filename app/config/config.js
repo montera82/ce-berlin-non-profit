@@ -1,9 +1,9 @@
 'use strict';
 
-let appName = 'church';
+const APP_NAME = 'church';
 let config = {
     environment: process.env.NODE_ENV,
-    appName: appName,
+    appName: APP_NAME,
     webserver: {
         port: process.env.PORT || '3001'
     },
@@ -25,7 +25,12 @@ let config = {
             min: (process.env.DATABASE_POOL_MIN) ? parseInt(process.env.DATABASE_POOL_MIN) : 2,
             max: (process.env.DATABASE_POOL_MAX) ? parseInt(process.env.DATABASE_POOL_MAX) : 2
         }
-    }
+    }, 
+    pagination: {
+        default_limit: 10,
+        default_offset: 0,
+        max_limit: 50
+    },
 };
 
 module.exports = config;

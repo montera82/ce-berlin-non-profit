@@ -86,8 +86,6 @@
                             </div>
                         </div>
                         <!-- title -->
-
-
                     </div>
                     <div class="table-responsive">
                         <table class="table v-middle">
@@ -99,146 +97,22 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
+                                {{#each viewData.rhapsodies as |rhapsody|}}
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
                                             <div class="">
-                                                <h4 class="m-b-0 font-16">Elite Admin</h4>
+                                                <h4 class="m-b-0 font-16">{{rhapsody.title}}</h4>
                                             </div>
                                         </div>
                                     </td>
-                                    <td>Single Use</td>
+                                    <td>{{rhapsody.date}}</td>
                                     <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
+                                        <a href="/admin/rhapsody/view/{{rhapsody.id}}" class="btn btn-info"> view</a>
+                                        <a href="/admin/rhapsody/edit/{{rhapsody.id}}" class="btn btn-info"> Edit</a> 
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                    <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                    <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                    <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                    <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                    <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                    <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a>  
-                                    </td>
-                                </tr>
-                                 <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Monster Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                    <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a>  
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Material Pro Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                    <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">Ample Admin</h4>
-                                            </div>
-                                        </div>
-                                    </td>
-                                    <td>Single Use</td>
-                                   <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
-                                    </td>
-                                </tr>
+                                {{/each}}
                             </tbody>
                         </table>
                     </div>
@@ -246,25 +120,42 @@
             </div>
         </div>
         <!-- pagination start -->
-        <nav aria-label="...">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                <span class="page-link">Previous</span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">1</a></li>
-                <li class="page-item active">
-                <span class="page-link">
-                    2
-                    <span class="sr-only">(current)</span>
-                </span>
-                </li>
-                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
-        <!-- pagination end-->
-        <!-- Row end -->
+        {{#if viewData.pagination.show }}
+            <div class="col-xs-12">
+                <div class="row text-center justify-content-center">
+                    <nav aria-label="...">
+                        <ul class="pagination">
+
+                            <li class="page-item">
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.first }}" class="page-link" aria-label="First">
+                                    <span aria-hidden="true">&laquo;</span>
+                                    First
+                                </a>
+                            </li>
+                            {{#if viewData.pagination.prev }}
+                            <li class="page-item" {{#unless viewData.pagination.prev }}class="disabled"{{/unless}}>
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.prev }}" class="page-link" aria-label="Previous">
+                                    <span aria-hidden="true">&lsaquo;</span>
+                                    Prev
+                                </a>
+                            </li>
+                            {{/if}}
+                            {{#if viewData.pagination.next }}
+                            <li class="page-item">
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.next }}" class="page-link" aria-label="Next">Next
+                                    <span aria-hidden="true">&rsaquo;</span>
+                                </a>
+                            </li>
+                            {{/if}}
+                            <li class="page-item" {{#unless viewData.pagination.next }}class="disabled"{{/unless}}>
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.last }}" class="page-link" aria-label="Last">Last
+                                    <span aria-hidden="true">&raquo;</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        {{/if}}
     </div>
 </div>

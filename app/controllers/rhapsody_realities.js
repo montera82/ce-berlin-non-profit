@@ -19,14 +19,12 @@ class RhapsodyController {
      * @param res
      */
     index(req, res) {
-
         let viewData = {
             menuActive: 'rhapsody'
         };
 
         //call the rhapsody service here to fetch rhapsodies from the DB e.t.c before redendering content
         res.render('rhapsody_realities', viewData);
-
     }
 
     /**
@@ -36,7 +34,6 @@ class RhapsodyController {
      * @param res 
      */
     addNewView(req, res) {
-
         res.render('admin_add_rhapsody', { layout: 'admin_main' });
     }
 
@@ -44,23 +41,23 @@ class RhapsodyController {
         let body = req.body;
 
         // Validate Form Input
-        let error = this.rhapsodyService.ValidateRhapsodyData(req);
+        let error = this.rhapsodyService.validateRhapsodyData(req);
         if (error) {
             this.logger.error('Validation Error: ', error);
-            let errorMessages = error.map( item => item.msg );
+            let errorMessages = error.map(item => item.msg);
             req.flash('error', errorMessages);
-            res.render('admin_add_rhapsody', { layout: 'admin_main'});
+            res.render('admin_add_rhapsody', { layout: 'admin_main' });
         }
 
         return this.rhapsodyService.createRhapsody(body)
-                .then(() => {
-                    req.flash('success', 'saved successfully!')
-                    res.render('admin_add_rhapsody', { layout: 'admin_main' });
-                })
-                .catch((err) => {
-                    req.flash('error', 'saving failed!')
-                    res.render('admin_add_rhapsody', { layout: 'admin_main' });
-                });
+            .then(() => {
+                req.flash('success', 'saved successfully!')
+                res.render('admin_add_rhapsody', { layout: 'admin_main' });
+            })
+            .catch((err) => {
+                req.flash('error', 'saving failed!')
+                res.render('admin_add_rhapsody', { layout: 'admin_main' });
+            });
     }
 
     /**
@@ -70,9 +67,22 @@ class RhapsodyController {
     * @param res
     */
     list(req, res) {
+        let viewData = {};
+        let params = {};
+        if (req.query.page) {
+            params.page = req.query.page;
+        }
 
-        res.render('admin_list_rhapsody', { layout: 'admin_main' });
-
+        this.rhapsodyService.listRhapsodies(params)
+            .then(data => {
+                viewData.rhapsodies = data.rhapsodies;
+                viewData.pagination = data.pagination;
+                res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
+            })
+            .catch(() => {
+                res.flash('error', 'There was an error retrieving rhapsodies, Please try again');
+                res.render('admin_add_rhapsody', { viewData, layout: 'admin_main' });
+            });
     }
 }
 
