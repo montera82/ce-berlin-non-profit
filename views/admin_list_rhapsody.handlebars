@@ -86,8 +86,6 @@
                             </div>
                         </div>
                         <!-- title -->
-
-
                     </div>
                     <div class="table-responsive">
                         <table class="table v-middle">
@@ -99,9 +97,7 @@
                                 </tr>
                             </thead>
                             <tbody class="text-center">
-                                {{!-- <script type="text/javascript">let viewData = "{{viewData.rhapsodies.[0].title}}"; console.log(viewData)</script> --}}
                                 {{#each viewData.rhapsodies as |rhapsody|}}
-                                {{!-- {{viewData.rhapsodies.[0].title }} --}}
                                 <tr>
                                     <td>
                                         <div class="d-flex align-items-center">
@@ -112,8 +108,8 @@
                                     </td>
                                     <td>{{rhapsody.date}}</td>
                                     <td> 
-                                        <a href="/admin/rhapsody/view/:id" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/:id" class="btn btn-info"> Edit</a> 
+                                        <a href="/admin/rhapsody/view/{{rhapsody.id}}" class="btn btn-info"> view</a>
+                                        <a href="/admin/rhapsody/edit/{{rhapsody.id}}" class="btn btn-info"> Edit</a> 
                                     </td>
                                 </tr>
                                 {{/each}}
@@ -161,10 +157,5 @@
                 </div>
             </div>
         {{/if}}
-
-
-
-        <!-- pagination end-->
-        <!-- Row end -->
     </div>
 </div>
