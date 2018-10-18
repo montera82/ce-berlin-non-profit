@@ -1,0 +1,139 @@
+<div class="page-wrapper">
+    <div class="container-fluid">
+        <!-- ============================================================== -->
+        <!-- Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <div class="row page-titles">
+            <div class="col-md-5 col-8 align-self-center">
+                <h3 class="text-themecolor m-b-0 m-t-0">Forms</h3>
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="javascript:void(0)">Home</a></li>
+                    <li class="breadcrumb-item active">Form</li>
+                </ol>
+            </div>
+            <div class="col-md-7 col-4 align-self-center">
+                <div class="d-flex m-t-10 justify-content-end">
+                    <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                        <div class="chart-text m-r-10">
+                            <h6 class="m-b-0"><small>THIS MONTH</small></h6>
+                            <h4 class="m-t-0 text-info">$58,356</h4>
+                        </div>
+                        <div class="spark-chart">
+                            <div id="monthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="d-flex m-r-20 m-l-10 hidden-md-down">
+                        <div class="chart-text m-r-10">
+                            <h6 class="m-b-0"><small>LAST MONTH</small></h6>
+                            <h4 class="m-t-0 text-primary">$48,356</h4>
+                        </div>
+                        <div class="spark-chart">
+                            <div id="lastmonthchart"><canvas width="60" height="35" style="display: inline-block; width: 60px; height: 35px; vertical-align: top;"></canvas></div>
+                        </div>
+                    </div>
+                    <div class="">
+                        <button class="right-side-toggle waves-effect waves-light btn-success btn btn-circle btn-sm pull-right m-l-10"><i
+                                class="ti-settings text-white"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Bread crumb and right sidebar toggle -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Start Page Content -->
+        <!-- ============================================================== -->
+        <!-- Row -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card card-outline-info">
+                    <div class="card-header">
+                        <h4 class="m-b-0 text-white">{{{ printMessages messages }}}</h4>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/add-rhapsody-realities" method="POST" class="form-horizontal form-bordered">
+                            <div style="padding:20px" class="form-body">
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Language</label>
+                                    <div class="col-md-9">
+                                        <div class="dl">
+                                            <select name="lang" class="custom-select">
+                                                <option value="en">English</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Title</label>
+                                    <div class="col-md-9">
+                                        <input name="title" type="text" class="form-control">
+                                        <small class="form-control-feedback"> Enter the title of the rhapsody here
+                                        </small> </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Opening Verse</label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="opening_verse" class="form-control">
+                                        <small class="form-control-feedback"> Enter the opening verse of the rhapsody</small>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Body</label>
+                                    <div class="col-md-9">
+                                        <textarea type="text" name="body" class="form-control" rows="8"></textarea>
+                                        <small class="form-control-feedback"> Enter the body of the rhapsody</small>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Confession</label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="confession" class="form-control">
+                                        <small class="form-control-feedback"> Enter the confession of the rhapsody</small>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Further Scripture</label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="further_scripture" class="form-control">
+                                        <small class="form-control-feedback"> Enter the further scripture of the
+                                            rhapsody</small> </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">One Year Bible Plan</label>
+                                    <div class="col-md-9">
+                                        <input type="text" name="one_year_bible_plan" class="form-control">
+                                        <small class="form-control-feedback"> Enter the one year bible plan of the
+                                            rhapsody</small> </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="control-label text-right col-md-3">Date</label>
+                                    <div class="col-md-9">
+                                        <input type="date" name="date" class="form-control">
+                                        <small class="form-control-feedback"> Enter the date of the rhapsody</small>
+                                    </div>
+                                </div>
+                                </div>
+                                <div class="form-actions">
+                                    <div class="row">
+                                        <div class="col-md-12" style="padding:20px">
+                                            <div class="row">
+                                                <div class="offset-sm-3 col-md-9">
+                                                    <button type="submit" name="save&stay" class="btn btn-success"> <i
+                                                            class="fa fa-check"></i>Save & Stay</button>
+                                                    <button type="button" name="save&exit" class="btn btn-success">Save
+                                                        & Exit</button>
+                                                    <button type="button" name="cancel" class="btn btn-info">Cancel</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Row -->
+    </div>
+</div>
