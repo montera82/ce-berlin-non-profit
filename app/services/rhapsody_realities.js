@@ -3,7 +3,6 @@
 let Rhapsody = require('app/models/rhapsody');
 let Bookshelf = require('app/bookshelf');
 let paginator = require('app/lib/paginator');
-
 paginator = new paginator();
     
 class RhapsodyService {
@@ -17,13 +16,6 @@ class RhapsodyService {
      */
     constructor(logger) {
         this.logger = logger;
-    }
-
-    /**
-     * Lists all rhapsodies
-     */
-    list() {
-        //todo definition of method that will list all 
     }
 
     /**
@@ -42,7 +34,6 @@ class RhapsodyService {
         rhapsody.date = data.date;
         rhapsody.lang = data.lang;
 
-
         return Bookshelf.transaction(trx => {
             return new Rhapsody().save(rhapsody, { method: 'insert', transacting: trx })
                 .then(rhapsody => {
@@ -51,14 +42,12 @@ class RhapsodyService {
                 })
                 .catch(err => {
                     this.logger.error('failed to create rhapsody', err);
-
                     throw new errors.UnknownError('an error occurred');
                 });
         });
     }
 
     validateRhapsodyData(req){
-        // Form Data Validation
         req.checkBody('title', 'Title field is required').notEmpty();
         req.checkBody('opening_verse', 'Opening verse field is required').notEmpty();
         req.checkBody('body', 'Body field is required').notEmpty();
@@ -71,8 +60,10 @@ class RhapsodyService {
         return req.validationErrors();
     }
 
+    /**
+     * Lists all rhapsodies
+     */
     listRhapsodies (params) {
-
         let pagination = {};
         let pages = paginator.getPagination(params);
 
@@ -81,14 +72,12 @@ class RhapsodyService {
             .count()
             .then( count => {
                 pages.total = count[0].count;
-                
                 return new Rhapsody().query(qb => {
                     qb.limit(pages.limit).offset(pages.offset);
                 }).fetchAll();
             })
             .then(rhapsodies => {
                 this.logger.info('successfully fetched Rhasodies');
-
                 pagination = paginator.paginate({
                     limit: pages.limit,
                     offset: pages.offset,
@@ -102,7 +91,6 @@ class RhapsodyService {
             })
             .catch(err => {
                 this.logger.error('failed to fetch Rhasodies ', err.message);
-
                 throw new errors.UnknownError('an unknown error occurred');
             });
     };

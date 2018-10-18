@@ -19,14 +19,12 @@ class RhapsodyController {
      * @param res
      */
     index(req, res) {
-
         let viewData = {
             menuActive: 'rhapsody'
         };
 
         //call the rhapsody service here to fetch rhapsodies from the DB e.t.c before redendering content
         res.render('rhapsody_realities', viewData);
-
     }
 
     /**
@@ -36,7 +34,6 @@ class RhapsodyController {
      * @param res 
      */
     addNewView(req, res) {
-
         res.render('admin_add_rhapsody', { layout: 'admin_main' });
     }
 
@@ -71,7 +68,6 @@ class RhapsodyController {
     */
     list(req, res) {
         let viewData = {};
-
         let params = {};
         if (req.query.page) {
             params.page = req.query.page;
@@ -79,7 +75,6 @@ class RhapsodyController {
 
         this.rhapsodyService.listRhapsodies(params)
             .then(data => {
-                
                 viewData.rhapsodies = data.rhapsodies;
                 viewData.pagination = data.pagination;
                 res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
@@ -87,8 +82,6 @@ class RhapsodyController {
             .catch(err => {
                 throw err;
             });
-
-
     }
 }
 
