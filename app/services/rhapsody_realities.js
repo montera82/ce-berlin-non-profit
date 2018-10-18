@@ -87,7 +87,6 @@ class RhapsodyService {
                     rhapsodies: rhapsodies.toJSON(),
                     pagination: pagination
                 };
-
             })
             .catch(err => {
                 this.logger.error('failed to fetch Rhasodies ', err.message);
