@@ -96,6 +96,11 @@ class RhapsodyController {
             menuActive: 'rhapsody'
         };
         let rhapsodyId = req.params.id;
+        let error = req.query.e;
+        if(error){
+            viewData.error = decodeURIComponent(error);
+        }
+
         if (!rhapsodyId) {
             req.flash('error', 'No Rhapsody ID specified');
             res.redirect('/admin/list-rhapsody-realities');
@@ -122,16 +127,15 @@ class RhapsodyController {
             menuActive: 'rhapsody'
         };
         let body = req.body;
-        console.log(body);
 
         // Validate Form Input
         let error = this.rhapsodyService.validateRhapsodyData(req);
         if (error) {
             this.logger.error('Validation Error: ', error);
             let errorMessages = error.map(item => item.msg);
-            let url = '/admin/edit-rhapsody-realities/' + body.id;
+            let url = '/admin/edit-rhapsody-realities/' + body.id + '?e=' + encodeURIComponent(error[0].msg);
             req.flash('error', errorMessages);
-            return res.redirect('/admin/edit-rhapsody-realities/' + body.id);
+            return res.redirect(url);
         }
 
         this.rhapsodyService.update(body)
