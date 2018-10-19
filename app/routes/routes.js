@@ -8,7 +8,7 @@ module.exports.setup = function setup(app, serviceLocator) {
     let homeController = serviceLocator.get('homeController');
     app.get('/', (req, res, next) => homeController.index(req, res, next));
     app.get('/rhapsody-realities',  (req, res, next) => rhapsodyController.index(req, res, next));
-    //Admin
+    //Admin Routes
     app.get('/admin/',  function (req, res, next) {
         res.render('admin_dashboard', {layout : 'admin_main'});
     });

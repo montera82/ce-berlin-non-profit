@@ -97,7 +97,7 @@ class RhapsodyController {
         };
         let rhapsodyId = req.params.id;
         let error = req.query.e;
-        if(error){
+        if (error) {
             viewData.error = decodeURIComponent(error);
         }
 
@@ -117,7 +117,7 @@ class RhapsodyController {
     }
 
     /**
-     * rhapsody list
+     * rhapsody update
      *
      * @param req
      * @param res
@@ -132,19 +132,42 @@ class RhapsodyController {
         if (error) {
             this.logger.error('Validation Error: ', error);
             let errorMessages = error.map(item => item.msg);
-            let url = '/admin/edit-rhapsody-realities/' + body.id + '?e=' + encodeURIComponent(error[0].msg);
-            req.flash('error', errorMessages);
-            return res.redirect(url);
+            return this.rhapsodyService.getRhapsody(body.id)
+                .then(rhapsody => {
+                    viewData.rhapsody = rhapsody;
+                    req.flash('error', errorMessages);
+                    res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
+                });
         }
-
+        // attempt update
         this.rhapsodyService.update(body)
-            .then( rhapsody => {
-                req.flash('success', 'Updated successfully!');
-                res.redirect('/admin/list-rhapsody-realities');
+            .then(() => {
+                //Get list of paginated rhapsody to display
+                let params = {};
+                if (req.query.page) {
+                    params.page = req.query.page;
+                }
+                this.rhapsodyService.listRhapsodies(params)
+                    .then(data => {
+                        viewData.rhapsodies = data.rhapsodies;
+                        viewData.pagination = data.pagination;
+                        req.flash('success', 'Updated successfully!');
+                        res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
+                    });
             })
-            .catch( err => {
-                req.flash('error', 'An unknown error has occurred, Please try again later');
-                res.redirect('/admin/list-rhapsody-realities');
+            .catch(err => {
+                //Get list of paginated rhapsody to display
+                let params = {};
+                if (req.query.page) {
+                    params.page = req.query.page;
+                }
+                this.rhapsodyService.listRhapsodies(params)
+                    .then(data => {
+                        viewData.rhapsodies = data.rhapsodies;
+                        viewData.pagination = data.pagination;
+                        req.flash('error', 'An unknown error has occurred, Please try again later');
+                        res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
+                    });
             })
     }
 }
