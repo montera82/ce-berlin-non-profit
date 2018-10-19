@@ -95,7 +95,7 @@ class RhapsodyService {
     };
 
     /**
-     * Lists all rhapsodies
+     * Get one rhapsody by id
      */
     getRhapsody(rhapsodyId) {
         return new Rhapsody({ id: rhapsodyId }).fetch()
@@ -107,6 +107,34 @@ class RhapsodyService {
                 this.logger.info('Failed to fetch rhapsody', err.message);
                 throw new error.UnknownError('an unknown error occured');
             })
+    }
+
+    /**
+     * Update a rhapsody
+     */
+    update(data){
+        let rhapsody = {};
+        rhapsody.id = data.id;
+        rhapsody.title = data.title;
+        rhapsody.opening_verse = data.opening_verse;
+        rhapsody.body = data.body;
+        rhapsody.confession = data.confession;
+        rhapsody.further_scripture = data.further_scripture;
+        rhapsody.one_year_bible_plan = data.one_year_bible_plan;
+        rhapsody.date = data.date;
+        rhapsody.lang = data.lang;
+
+        return Bookshelf.transaction( trx => {
+            return new Rhapsody().save(rhapsody, { method: 'update', transacting: trx })
+                .then( rhapsody => {
+                    this.logger.info('Successfully updated rhapsody');
+                    return rhapsody;
+                })
+                .catch( err => {
+                    this.logger.info('Failed to update rhapsody', err.message);
+                    throw new error.UnknownError('an unknown error occured');
+                });
+        });
     }
 }
 

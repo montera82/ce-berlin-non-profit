@@ -44,7 +44,7 @@ class RhapsodyController {
             this.logger.error('Validation Error: ', error);
             let errorMessages = error.map(item => item.msg);
             req.flash('error', errorMessages);
-            res.render('admin_add_rhapsody', { layout: 'admin_main' });
+            return res.render('admin_add_rhapsody', { layout: 'admin_main' });
         }
 
         this.rhapsodyService.createRhapsody(body)
@@ -96,20 +96,54 @@ class RhapsodyController {
             menuActive: 'rhapsody'
         };
         let rhapsodyId = req.params.id;
-        if(!rhapsodyId){
+        if (!rhapsodyId) {
             req.flash('error', 'No Rhapsody ID specified');
             res.redirect('/admin/list-rhapsody-realities');
         }
         this.rhapsodyService.getRhapsody(rhapsodyId)
-            .then( rhapsody => {
+            .then(rhapsody => {
                 viewData.rhapsody = rhapsody;
-                res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main'});
+                res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
             })
-            .catch( () => {
+            .catch(() => {
                 req.flash('error', 'An unknown error has occurred, Please try again later');
                 res.redirect('/admin/list-rhapsody-realities');
             });
-   }
+    }
+
+    /**
+     * rhapsody list
+     *
+     * @param req
+     * @param res
+     */
+    update(req, res, next) {
+        let viewData = {
+            menuActive: 'rhapsody'
+        };
+        let body = req.body;
+        console.log(body);
+
+        // Validate Form Input
+        let error = this.rhapsodyService.validateRhapsodyData(req);
+        if (error) {
+            this.logger.error('Validation Error: ', error);
+            let errorMessages = error.map(item => item.msg);
+            let url = '/admin/edit-rhapsody-realities/' + body.id;
+            req.flash('error', errorMessages);
+            return res.redirect('/admin/edit-rhapsody-realities/' + body.id);
+        }
+
+        this.rhapsodyService.update(body)
+            .then( rhapsody => {
+                req.flash('success', 'Updated successfully!');
+                res.redirect('/admin/list-rhapsody-realities');
+            })
+            .catch( err => {
+                req.flash('error', 'An unknown error has occurred, Please try again later');
+                res.redirect('/admin/list-rhapsody-realities');
+            })
+    }
 }
 
 module.exports = RhapsodyController;

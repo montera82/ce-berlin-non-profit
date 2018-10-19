@@ -52,14 +52,18 @@
                         <h4 class="m-b-0 text-white">{{{ printMessages messages }}}</h4>
                     </div>
                     <div class="card-body">
-                        <form action="/admin/add-rhapsody-realities" method="POST" class="form-horizontal form-bordered">
+                        <form action="/admin/edit-rhapsody-realities" method="POST" class="form-horizontal form-bordered">
+                            <input type="hidden" name="id" value="{{viewData.rhapsody.id}}">
                             <div style="padding:20px" class="form-body">
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Language</label>
                                     <div class="col-md-9">
                                         <div class="dl">
                                             <select name="lang" class="custom-select">
-                                                <option value={{viewData.rhapsody.lang}}>{{viewData.rhapsody.lang}}</option>
+                                                {{#if viewData.rhapsody.lang}}
+                                                    <option value={{viewData.rhapsody.lang}}>{{viewData.rhapsody.lang}}</option>
+                                                {{/if}}
+                                                <option value="en">en</option>
                                             </select>
                                         </div>
                                     </div>
