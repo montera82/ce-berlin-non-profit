@@ -52,8 +52,7 @@
                     <h4 class="m-b-0 text-white">{{{ printMessages messages }}}</h4>
                     </div>
                     <div class="card-body">
-                        <form action="/admin/edit-rhapsody-realities" method="POST" class="form-horizontal form-bordered">
-                            <input type="hidden" name="id" value="{{viewData.rhapsody.id}}">
+                        <form action="/admin/edit-rhapsody-realities/{{viewData.rhapsody.id}}" method="POST" class="form-horizontal form-bordered">
                             <div style="padding:20px" class="form-body">
                                 <div class="form-group row">
                                     <label class="control-label text-right col-md-3">Language</label>

@@ -112,9 +112,8 @@ class RhapsodyService {
     /**
      * Update a rhapsody
      */
-    update(data){
+    update(data, rhapsodyId){
         let rhapsody = {};
-        rhapsody.id = data.id;
         rhapsody.title = data.title;
         rhapsody.opening_verse = data.opening_verse;
         rhapsody.body = data.body;
@@ -125,7 +124,7 @@ class RhapsodyService {
         rhapsody.lang = data.lang;
 
         return Bookshelf.transaction( trx => {
-            return new Rhapsody().save(rhapsody, { method: 'update', transacting: trx })
+            return new Rhapsody({ id: rhapsodyId }).save(rhapsody, { method: 'update', transacting: trx })
                 .then( rhapsody => {
                     this.logger.info('Successfully updated rhapsody');
                     return rhapsody;
