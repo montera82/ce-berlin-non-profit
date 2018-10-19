@@ -127,7 +127,6 @@ class RhapsodyController {
             menuActive: 'rhapsody'
         };
         let body = req.body;
-
         // Validate Form Input
         let error = this.rhapsodyService.validateRhapsodyData(req);
         if (error) {
