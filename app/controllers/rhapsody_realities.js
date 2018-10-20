@@ -23,7 +23,7 @@ class RhapsodyController {
         let viewData = {
             menuActive: 'rhapsody'
         };
-        // Get current today's date
+        // Get today's date
         var now = new Date();
         var dd = now.getDate();
         var mm = now.getMonth() + 1; //January is 0!
