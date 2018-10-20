@@ -31,6 +31,10 @@ let config = {
         default_offset: 0,
         max_limit: 50
     },
+    date: {
+        days: ['SUNDAT', 'MONDAY', 'TUESDAY', 'WEDNESDAY', 'THURSDAY', 'FRIDAY', 'SATURDAY'], 
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+    }
 };
 
 module.exports = config;

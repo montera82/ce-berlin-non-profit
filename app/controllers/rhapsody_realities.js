@@ -1,4 +1,5 @@
 'use strict';
+let config = require('app/config/config');
 
 class RhapsodyController {
     /**
@@ -18,11 +19,40 @@ class RhapsodyController {
      * @param req
      * @param res
      */
-    index(req, res) {
+    index(req, res, next) {
         let viewData = {
             menuActive: 'rhapsody'
         };
-        res.render('show_rhapsody', viewData);
+        // Get current today's date
+        var now = new Date();
+        var dd = now.getDate();
+        var mm = now.getMonth() + 1; //January is 0!
+        var yyyy = now.getFullYear();
+        if (dd < 10) {
+            dd = '0' + dd;
+        }
+        if (mm < 10) {
+            mm = '0' + mm;
+        }
+        let today = yyyy + '-' + mm + '-' + dd;
+        //Format date to display in view
+        var day_number = now.getDay();//returns a number 0-6
+        var day_string = config.date.days[day_number];
+        var month = config.date.months[mm - 1];
+        var date = dd + ' ' + month + ' ' + yyyy;
+        //Get rhapsody for today
+        this.rhapsodyService.getRhapsodyByDate(today)
+            .then(rhapsody => {
+                viewData.date = date;
+                viewData.day = day_string;
+                viewData.rhapsody = rhapsody;
+                this.logger.info(viewData);
+                res.render('show_rhapsody', viewData);
+            })
+            .catch( err => {
+                req.flash('error', 'No Rhpasody was entered for today, kindly contact the admin');
+                res.render('show_rhapsody', { viewData });
+            });
     }
 
     /**
@@ -100,7 +130,7 @@ class RhapsodyController {
             req.flash('error', 'No Rhapsody ID specified');
             res.redirect('/admin/list-rhapsody-realities');
         }
-        this.rhapsodyService.getRhapsody(rhapsodyId)
+        this.rhapsodyService.getRhapsodyByID(rhapsodyId)
             .then(rhapsody => {
                 viewData.rhapsody = rhapsody;
                 res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });

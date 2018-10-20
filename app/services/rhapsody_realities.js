@@ -97,8 +97,23 @@ class RhapsodyService {
     /**
      * Get one rhapsody by id
      */
-    getRhapsody(rhapsodyId) {
-        return new Rhapsody({ id: rhapsodyId }).fetch()
+    getRhapsodyByID(rhapsodyId) {
+        return new Rhapsody({ id: rhapsodyId }).fetch({ require: true })
+            .then(rhapsody => {
+                this.logger.info('Successfully fetched rhapsody');
+                return rhapsody.toJSON();
+            })
+            .catch(err => {
+                this.logger.info('Failed to fetch rhapsody', err.message);
+                throw new error.UnknownError('an unknown error occured');
+            })
+    }
+
+     /**
+     * Get one rhapsody by date
+     */
+    getRhapsodyByDate(date) {
+        return new Rhapsody({ date: date }).fetch({ require: true })
             .then(rhapsody => {
                 this.logger.info('Successfully fetched rhapsody');
                 return rhapsody.toJSON();
@@ -112,7 +127,7 @@ class RhapsodyService {
     /**
      * Update a rhapsody
      */
-    update(data, rhapsodyId){
+    update(data, rhapsodyId) {
         let rhapsody = {};
         rhapsody.title = data.title;
         rhapsody.opening_verse = data.opening_verse;
@@ -123,13 +138,13 @@ class RhapsodyService {
         rhapsody.date = data.date;
         rhapsody.lang = data.lang;
 
-        return Bookshelf.transaction( trx => {
+        return Bookshelf.transaction(trx => {
             return new Rhapsody({ id: rhapsodyId }).save(rhapsody, { method: 'update', transacting: trx })
-                .then( rhapsody => {
+                .then(rhapsody => {
                     this.logger.info('Successfully updated rhapsody');
                     return rhapsody;
                 })
-                .catch( err => {
+                .catch(err => {
                     this.logger.info('Failed to update rhapsody', err.message);
                     throw new error.UnknownError('an unknown error occured');
                 });
