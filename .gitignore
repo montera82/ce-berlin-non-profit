@@ -75,5 +75,7 @@ typings/
 # Serverless directories
 .serverless
 
+# cached db stuffs
+postgres-data
 
 # End of https://www.gitignore.io/api/node
