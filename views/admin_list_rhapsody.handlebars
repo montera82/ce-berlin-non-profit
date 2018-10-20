@@ -50,94 +50,68 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <!-- title -->
-                        <div class="d-md-flex align-items-center">
-                            <div>
-                                <div class="dl">
-                                    <select class="custom-select">
-                                        <option value="1">January</option>
-                                        <option value="2">February</option>
-                                        <option value="3">March</option>
-                                        <option value="3">April</option>
-                                        <option value="3">May</option>
-                                        <option value="3">June</option>
-                                        <option value="3">July</option>
-                                        <option value="3">August</option>
-                                        <option value="3">September</option>
-                                        <option value="3">October</option>
-                                        <option value="3">November</option>
-                                        <option value="3">December</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="ml-auto mr-auto">
-                                <p>{{{ printMessages messages }}}</p>
-                            </div>
-                            <div class="ml-auto">
-                                <div class="dl">
-                                    <select class="custom-select">
-                                        <option value="1">2010</option>
-                                        <option value="2">2011</option>
-                                        <option value="3">2012</option>
-                                        <option value="3">2014</option>
-                                        <option value="3">2015</option>
-                                        <option value="3">2016</option>
-                                        <option value="3">2017</option>
-                                        <option value="3">2018</option>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- title -->
-                    </div>
-                    <div class="table-responsive">
-                        <table class="table v-middle">
-                            <thead >
-                                <tr class="bg-light">
-                                    <th class="border-top-0">Title</th>
-                                    <th class="border-top-0 text-center">Date</th>
-                                    <th class="border-top-0 text-center">Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody class="text-center">
-                                {{#each viewData.rhapsodies as |rhapsody|}}
-                                <tr>
-                                    <td>
-                                        <div class="d-flex align-items-center">
-                                            <div class="">
-                                                <h4 class="m-b-0 font-16">{{rhapsody.title}}</h4>
-                                            </div>
+                        <div class="table-responsive">
+                            <div id="editable-datatable_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                                <div class="row" style="padding:20px">
+                                    <div class="col-sm-6"></div>
+                                    <div class="col-sm-6">
+                                        <div id="editable-datatable_filter" class="dataTables_filter">
+                                            <label>Search:<input type="month" class="form-control input-sm"
+                                                    aria-controls="editable-datatable">
+                                            </label>
                                         </div>
-                                    </td>
-                                    <td>{{rhapsody.date}}</td>
-                                    <td> 
-                                        <a href="/admin/edit-rhapsody-realities/{{rhapsody.id}}"> <i class="fas fa-pencil-alt m-r-10"></i></a>
-                                        <a href="/admin/edit-rhapsody-realities/{{rhapsody.id}}"> <i class="far fa-eye m-r-10"></i></a> 
-                                    </td>
-                                </tr>
-                                {{/each}}
-                            </tbody>
-                        </table>
+                                    </div>
+                                </div>
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th class="border-top-0">Title</th>
+                                            <th class="border-top-0 text-center">Date</th>
+                                            <th class="border-top-0 text-center">Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="text-center">
+                                        {{#each viewData.rhapsodies as |rhapsody|}}
+                                        <tr>
+                                            <td>
+                                                <div class="d-flex align-items-center">
+                                                    <div class="">
+                                                        <h4 class="m-b-0 font-16">{{rhapsody.title}}</h4>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>{{rhapsody.date}}</td>
+                                            <td>
+                                                <a href="/admin/edit-rhapsody-realities/{{rhapsody.id}}"> <i class="fas fa-pencil-alt m-r-10"></i></a>
+                                                <a href="/admin/edit-rhapsody-realities/{{rhapsody.id}}"> <i class="far fa-eye m-r-10"></i></a>
+                                            </td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                            </div>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- pagination start -->
-        {{#if viewData.pagination.show }}
+            <!-- pagination start -->
+            {{#if viewData.pagination.show }}
             <div class="col-xs-12">
                 <div class="row text-center justify-content-center">
                     <nav aria-label="...">
                         <ul class="pagination">
 
                             <li class="page-item">
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.first }}" class="page-link" aria-label="First">
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.first }}" class="page-link"
+                                    aria-label="First">
                                     <span aria-hidden="true">&laquo;</span>
                                     First
                                 </a>
                             </li>
                             {{#if viewData.pagination.prev }}
-                            <li class="page-item" {{#unless viewData.pagination.prev }}class="disabled"{{/unless}}>
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.prev }}" class="page-link" aria-label="Previous">
+                            <li class="page-item" {{#unless viewData.pagination.prev }} class="disabled" {{/unless}}>
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.prev }}" class="page-link"
+                                    aria-label="Previous">
                                     <span aria-hidden="true">&lsaquo;</span>
                                     Prev
                                 </a>
@@ -145,13 +119,15 @@
                             {{/if}}
                             {{#if viewData.pagination.next }}
                             <li class="page-item">
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.next }}" class="page-link" aria-label="Next">Next
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.next }}" class="page-link"
+                                    aria-label="Next">Next
                                     <span aria-hidden="true">&rsaquo;</span>
                                 </a>
                             </li>
                             {{/if}}
-                            <li class="page-item" {{#unless viewData.pagination.next }}class="disabled"{{/unless}}>
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.last }}" class="page-link" aria-label="Last">Last
+                            <li class="page-item" {{#unless viewData.pagination.next }} class="disabled" {{/unless}}>
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.last }}" class="page-link"
+                                    aria-label="Last">Last
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -159,6 +135,6 @@
                     </nav>
                 </div>
             </div>
-        {{/if}}
+            {{/if}}
+        </div>
     </div>
-</div>
