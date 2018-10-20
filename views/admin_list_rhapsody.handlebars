@@ -70,6 +70,9 @@
                                     </select>
                                 </div>
                             </div>
+                            <div class="ml-auto mr-auto">
+                                <p>{{{ printMessages messages }}}</p>
+                            </div>
                             <div class="ml-auto">
                                 <div class="dl">
                                     <select class="custom-select">
@@ -108,8 +111,8 @@
                                     </td>
                                     <td>{{rhapsody.date}}</td>
                                     <td> 
-                                        <a href="/admin/rhapsody/view/{{rhapsody.id}}" class="btn btn-info"> view</a>
-                                        <a href="/admin/rhapsody/edit/{{rhapsody.id}}" class="btn btn-info"> Edit</a> 
+                                        <a href="/admin/edit-rhapsody-realities/{{rhapsody.id}}" class="btn btn-info"> view</a>
+                                        <a href="/admin/edit-rhapsody-realities/{{rhapsody.id}}" class="btn btn-info"> Edit</a> 
                                     </td>
                                 </tr>
                                 {{/each}}

@@ -22,9 +22,7 @@ class RhapsodyController {
         let viewData = {
             menuActive: 'rhapsody'
         };
-
-        //call the rhapsody service here to fetch rhapsodies from the DB e.t.c before redendering content
-        res.render('rhapsody_realities', viewData);
+        res.render('show_rhapsody', viewData);
     }
 
     /**
@@ -46,10 +44,10 @@ class RhapsodyController {
             this.logger.error('Validation Error: ', error);
             let errorMessages = error.map(item => item.msg);
             req.flash('error', errorMessages);
-            res.render('admin_add_rhapsody', { layout: 'admin_main' });
+            return res.render('admin_add_rhapsody', { layout: 'admin_main' });
         }
 
-        return this.rhapsodyService.createRhapsody(body)
+        this.rhapsodyService.createRhapsody(body)
             .then(() => {
                 req.flash('success', 'saved successfully!')
                 res.render('admin_add_rhapsody', { layout: 'admin_main' });
@@ -66,8 +64,10 @@ class RhapsodyController {
     * @param req
     * @param res
     */
-    list(req, res) {
-        let viewData = {};
+    list(req, res, next) {
+        let viewData = {
+            menuActive: 'rhapsody'
+        };
         let params = {};
         if (req.query.page) {
             params.page = req.query.page;
@@ -80,8 +80,69 @@ class RhapsodyController {
                 res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
             })
             .catch(() => {
-                res.flash('error', 'There was an error retrieving rhapsodies, Please try again');
+                req.flash('error', 'There was an error retrieving rhapsodies, Please try again');
                 res.render('admin_add_rhapsody', { viewData, layout: 'admin_main' });
+            });
+    }
+
+    /**
+    * rhapsody list
+    *
+    * @param req
+    * @param res
+    */
+    editView(req, res, next) {
+        let viewData = {
+            menuActive: 'rhapsody'
+        };
+        let rhapsodyId = req.params.id;
+        if (!rhapsodyId) {
+            req.flash('error', 'No Rhapsody ID specified');
+            res.redirect('/admin/list-rhapsody-realities');
+        }
+        this.rhapsodyService.getRhapsody(rhapsodyId)
+            .then(rhapsody => {
+                viewData.rhapsody = rhapsody;
+                res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
+            })
+            .catch(() => {
+                req.flash('error', 'An unknown error has occurred, Please try again later');
+                res.redirect('/admin/list-rhapsody-realities');
+            });
+    }
+
+    /**
+     * rhapsody update
+     *
+     * @param req
+     * @param res
+     */
+    update(req, res, next) {
+        let viewData = {
+            menuActive: 'rhapsody'
+        };
+        let body = req.body;
+        let rhapsodyId = req.params.id;
+        // Validate form Input
+        let error = this.rhapsodyService.validateRhapsodyData(req);
+        if (error) {
+            this.logger.error('Validation Error: ', error);
+            let errorMessages = error.map(item => item.msg);
+            viewData.rhapsody = body;
+            viewData.rhapsody.id = rhapsodyId;
+            req.flash('error', errorMessages);
+            return res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
+        }
+        // attempt update
+        this.rhapsodyService.update(body, rhapsodyId)
+            .then(() => {
+                res.redirect('/admin/list-rhapsody-realities');
+            })
+            .catch(err => {
+                viewData.rhapsody = body;
+                viewData.rhapsody.id = rhapsodyId;
+                req.flash('error', 'An unknown error has occurred, Please try again');
+                res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
             });
     }
 }
