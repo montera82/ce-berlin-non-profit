@@ -46,7 +46,6 @@ class RhapsodyController {
                 viewData.date = date;
                 viewData.day = day_string;
                 viewData.rhapsody = rhapsody;
-                this.logger.info(viewData);
                 res.render('show_rhapsody', viewData);
             })
             .catch( err => {
