@@ -26,7 +26,7 @@ class RhapsodyController {
         };
         // Get today's date for rhapsody fetching
         let today = dateFormat(now, "isoDate");
-        //get date to with day for display in view
+        //get date with day for display in view
         let date = dateFormat(now, "fullDate");
         //Get rhapsody for today
         this.rhapsodyService.getRhapsodyByDate(today)
