@@ -100,7 +100,7 @@ class RhapsodyService {
     getRhapsodyByID(rhapsodyId) {
         return new Rhapsody({ id: rhapsodyId }).fetch({ require: true })
             .then(rhapsody => {
-                this.logger.info('Successfully fetched rhapsody');
+                this.logger.info('Successfully fetched rhapsody, RhapsodyID: ' + rhapsody.id);
                 return rhapsody.toJSON();
             })
             .catch(err => {
@@ -115,7 +115,7 @@ class RhapsodyService {
     getRhapsodyByDate(date) {
         return new Rhapsody({ date: date }).fetch({ require: true })
             .then(rhapsody => {
-                this.logger.info('Successfully fetched rhapsody');
+                this.logger.info('Successfully fetched rhapsody, RhapsodyID: ' + rhapsody.id);
                 return rhapsody.toJSON();
             })
             .catch(err => {

@@ -26,14 +26,11 @@ class RhapsodyController {
         };
         // Get today's date for rhapsody fetching
         let today = dateFormat(now, "isoDate");
-        this.logger.info(today);
         //get date to with day for display in view
         let date = dateFormat(now, "fullDate");
-        this.logger.info(date);
         //Get rhapsody for today
         this.rhapsodyService.getRhapsodyByDate(today)
             .then(rhapsody => {
-                this.logger.info(rhapsody);
                 viewData.date = date;
                 viewData.rhapsody = rhapsody;
                 res.render('show_rhapsody', viewData);
