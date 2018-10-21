@@ -56,9 +56,11 @@
                                     <div class="col-sm-6"></div>
                                     <div class="col-sm-6">
                                         <div id="editable-datatable_filter" class="dataTables_filter">
-                                            <label>Search:<input type="month" class="form-control input-sm"
-                                                    aria-controls="editable-datatable">
-                                            </label>
+                                            <form class="form-inline" method="GET" action="/admin/list-rhapsody-realities">
+                                                <input class="form-control mr-sm-2" name="month" type="month" placeholder="Search"
+                                                    aria-label="Search">
+                                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -138,4 +140,3 @@
             {{/if}}
         </div>
     </div>
-    

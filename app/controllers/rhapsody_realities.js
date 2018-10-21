@@ -84,12 +84,15 @@ class RhapsodyController {
         let viewData = {
             menuActive: 'rhapsody'
         };
+        let query = req.query;
+        let filterBy = query.month.split('-')[1] || dateFormat(now, 'mm');//returns the current month as two digit if query.filterBy is empty
+        // get pagination params if available 
         let params = {};
-        if (req.query.page) {
+        if (query.page) {
             params.page = req.query.page;
         }
 
-        this.rhapsodyService.listRhapsodies(params)
+        this.rhapsodyService.listRhapsodies(filterBy, params)
             .then(data => {
                 viewData.rhapsodies = data.rhapsodies;
                 viewData.pagination = data.pagination;

@@ -1,5 +1,6 @@
 'use strict';
 
+let knex = require('app/config/database');
 let Rhapsody = require('app/models/rhapsody');
 let Bookshelf = require('app/bookshelf');
 let paginator = require('app/lib/paginator');
@@ -63,7 +64,7 @@ class RhapsodyService {
     /**
      * Lists all rhapsodies
      */
-    listRhapsodies(params) {
+    listRhapsodies(filterBy, params) {
         let pagination = {};
         let pages = paginator.getPagination(params);
 
@@ -73,7 +74,7 @@ class RhapsodyService {
             .then(count => {
                 pages.total = count[0].count;
                 return new Rhapsody().query(qb => {
-                    qb.limit(pages.limit).offset(pages.offset);
+                    qb.where(knex.raw('to_char(date, \'MM\')'), filterBy).limit(pages.limit).offset(pages.offset);
                 }).fetchAll();
             })
             .then(rhapsodies => {
