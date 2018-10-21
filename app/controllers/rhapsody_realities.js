@@ -1,4 +1,6 @@
 'use strict';
+let dateFormat = require('dateformat');
+let now = Date();
 
 class RhapsodyController {
     /**
@@ -18,11 +20,25 @@ class RhapsodyController {
      * @param req
      * @param res
      */
-    index(req, res) {
+    index(req, res, next) {
         let viewData = {
             menuActive: 'rhapsody'
         };
-        res.render('show_rhapsody', viewData);
+        // Get today's date for rhapsody fetching
+        let today = dateFormat(now, "isoDate");
+        //get date to with day for display in view
+        let date = dateFormat(now, "fullDate");
+        //Get rhapsody for today
+        this.rhapsodyService.getRhapsodyByDate(today)
+            .then(rhapsody => {
+                viewData.date = date;
+                viewData.rhapsody = rhapsody;
+                res.render('show_rhapsody', viewData);
+            })
+            .catch( err => {
+                req.flash('error', 'No Rhpasody was entered for today, kindly contact the admin');
+                res.render('show_rhapsody', { viewData });
+            });
     }
 
     /**
@@ -100,7 +116,7 @@ class RhapsodyController {
             req.flash('error', 'No Rhapsody ID specified');
             res.redirect('/admin/list-rhapsody-realities');
         }
-        this.rhapsodyService.getRhapsody(rhapsodyId)
+        this.rhapsodyService.getRhapsodyByID(rhapsodyId)
             .then(rhapsody => {
                 viewData.rhapsody = rhapsody;
                 res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });

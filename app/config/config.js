@@ -30,7 +30,7 @@ let config = {
         default_limit: 10,
         default_offset: 0,
         max_limit: 50
-    },
+    }
 };
 
 module.exports = config;
