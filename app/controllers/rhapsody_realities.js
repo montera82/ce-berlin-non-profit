@@ -1,5 +1,6 @@
 'use strict';
-let config = require('app/config/config');
+let dateFormat = require('dateformat');
+let now = Date();
 
 class RhapsodyController {
     /**
@@ -23,28 +24,17 @@ class RhapsodyController {
         let viewData = {
             menuActive: 'rhapsody'
         };
-        // Get today's date
-        var now = new Date();
-        var dd = now.getDate();
-        var mm = now.getMonth() + 1; //January is 0!
-        var yyyy = now.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        let today = yyyy + '-' + mm + '-' + dd;
-        //Format date to display in view
-        var day_number = now.getDay();//returns a number 0-6
-        var day_string = config.date.days[day_number];
-        var month = config.date.months[mm - 1];
-        var date = dd + ' ' + month + ' ' + yyyy;
+        // Get today's date for rhapsody fetching
+        let today = dateFormat(now, "isoDate");
+        this.logger.info(today);
+        //get date to with day for display in view
+        let date = dateFormat(now, "fullDate");
+        this.logger.info(date);
         //Get rhapsody for today
         this.rhapsodyService.getRhapsodyByDate(today)
             .then(rhapsody => {
+                this.logger.info(rhapsody);
                 viewData.date = date;
-                viewData.day = day_string;
                 viewData.rhapsody = rhapsody;
                 res.render('show_rhapsody', viewData);
             })

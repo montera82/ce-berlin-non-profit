@@ -24,6 +24,7 @@
     "bookshelf-soft-delete": "^5.0.0",
     "connect-flash": "^0.1.1",
     "custom-error-generator": "^7.0.0",
+    "dateformat": "^3.0.3",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "express-messages": "^1.0.1",
