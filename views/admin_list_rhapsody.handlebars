@@ -104,7 +104,7 @@
                         <ul class="pagination">
 
                             <li class="page-item">
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.first }}" class="page-link"
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.first }}&month={{viewData.filterBy}}" class="page-link"
                                     aria-label="First">
                                     <span aria-hidden="true">&laquo;</span>
                                     First
@@ -112,7 +112,7 @@
                             </li>
                             {{#if viewData.pagination.prev }}
                             <li class="page-item" {{#unless viewData.pagination.prev }} class="disabled" {{/unless}}>
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.prev }}" class="page-link"
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.prev }}&month={{viewData.filterBy}}" class="page-link"
                                     aria-label="Previous">
                                     <span aria-hidden="true">&lsaquo;</span>
                                     Prev
@@ -121,14 +121,14 @@
                             {{/if}}
                             {{#if viewData.pagination.next }}
                             <li class="page-item">
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.next }}" class="page-link"
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.next }}&month={{viewData.filterBy}}" class="page-link"
                                     aria-label="Next">Next
                                     <span aria-hidden="true">&rsaquo;</span>
                                 </a>
                             </li>
                             {{/if}}
                             <li class="page-item" {{#unless viewData.pagination.next }} class="disabled" {{/unless}}>
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.last }}" class="page-link"
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.last }}&month={{viewData.filterBy}}" class="page-link"
                                     aria-label="Last">Last
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
@@ -140,3 +140,4 @@
             {{/if}}
         </div>
     </div>
+    
