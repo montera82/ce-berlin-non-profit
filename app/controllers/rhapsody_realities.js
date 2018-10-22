@@ -86,13 +86,13 @@ class RhapsodyController {
         };
         let query = req.query;
         //Get key to filter by
-        let filterBy = dateFormat(now, 'mm'); //returns the current month as two digit if query.filterBy is empty
+        let filterBy = dateFormat(now, 'mm'); //returns the current month as two digit
         if(query.month){
            filterBy = query.month.length == 2? query.month : query.month.split('-')[1];
         }
         let params = {};
         if (query.page) {
-            params.page = req.query.page;
+            params.page = query.page;
         }
 
         this.rhapsodyService.listRhapsodies(filterBy, params)
