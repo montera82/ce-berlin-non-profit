@@ -153,7 +153,7 @@ class RhapsodyController {
         };
         let body = req.body;
         let rhapsodyId = req.params.id;
-        // Validate form Input
+        // Validate form input
         let error = this.rhapsodyService.validateRhapsodyData(req);
         if (error) {
             this.logger.error('Validation Error: ', error);
@@ -163,7 +163,7 @@ class RhapsodyController {
             req.flash('error', errorMessages);
             return res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
         }
-        // attempt update
+        // Attempt update
         this.rhapsodyService.update(body, rhapsodyId)
             .then(() => {
                 res.redirect('/admin/list-rhapsody-realities');
