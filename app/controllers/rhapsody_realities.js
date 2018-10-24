@@ -35,7 +35,7 @@ class RhapsodyController {
                 viewData.rhapsody = rhapsody;
                 res.render('show_rhapsody', viewData);
             })
-            .catch( err => {
+            .catch(err => {
                 req.flash('error', 'No Rhpasody was entered for today, kindly contact the admin');
                 res.render('show_rhapsody', { viewData });
             });
@@ -62,15 +62,23 @@ class RhapsodyController {
             req.flash('error', errorMessages);
             return res.render('admin_add_rhapsody', { layout: 'admin_main' });
         }
-
-        this.rhapsodyService.createRhapsody(body)
-            .then(() => {
-                req.flash('success', 'saved successfully!')
-                res.render('admin_add_rhapsody', { layout: 'admin_main' });
-            })
-            .catch((err) => {
-                req.flash('error', 'saving failed!')
-                res.render('admin_add_rhapsody', { layout: 'admin_main' });
+        //Check if rhapsody already exists before adding
+        this.rhapsodyService.doesRhapsodyExist(body.date)
+            .then(resp => {
+                if (resp == true) {
+                    req.flash('error', 'Rhapsody already exists');
+                    return res.render('admin_add_rhapsody', { layout: 'admin_main' });
+                } else {
+                    this.rhapsodyService.createRhapsody(body)
+                        .then(() => {
+                            req.flash('success', 'saved successfully!')
+                            res.render('admin_add_rhapsody', { layout: 'admin_main' });
+                        })
+                        .catch((err) => {
+                            req.flash('error', 'saving failed!')
+                            res.render('admin_add_rhapsody', { layout: 'admin_main' });
+                        });
+                }
             });
     }
 
@@ -87,8 +95,8 @@ class RhapsodyController {
         let query = req.query;
         //Get key to filter by
         let filterBy = dateFormat(now, 'yyyy-mm');
-        if(query.month){
-           filterBy = query.month;
+        if (query.month) {
+            filterBy = query.month;
         }
         let params = {};
         if (query.page) {

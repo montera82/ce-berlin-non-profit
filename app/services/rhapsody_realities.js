@@ -48,6 +48,9 @@ class RhapsodyService {
         });
     }
 
+    /**
+        * Backend validation for all input fields
+    */
     validateRhapsodyData(req) {
         req.checkBody('title', 'Title field is required').notEmpty();
         req.checkBody('opening_verse', 'Opening verse field is required').notEmpty();
@@ -59,6 +62,29 @@ class RhapsodyService {
         req.checkBody('lang', 'Language field is required').notEmpty();
 
         return req.validationErrors();
+    }
+
+    /**
+    * Check if rhapsody already exist by date
+    */
+    doesRhapsodyExist(date) {
+        return new Rhapsody()
+            .query( qb => {
+                qb.where(knex.raw('to_char(date, \'YYYY-MM-DD\')'), date);
+            })
+            .count()
+            .then( count => {
+                if(count == 0){
+                    this.logger.info('Rhapsody does not exist, thus can be added');
+                    return false;
+                }
+                this.logger.info('Rhapsody already exist, cannot be added');
+                return true;
+            })
+            .catch( err => {
+                this.logger.error('Something happend, could\'nt verify if rhapsody exist');
+                throw new error.UnknownError('An unknown error occured');
+            });
     }
 
     /**
@@ -112,9 +138,9 @@ class RhapsodyService {
             })
     }
 
-     /**
-     * Get one rhapsody by date
-     */
+    /**
+    * Get one rhapsody by date
+    */
     getRhapsodyByDate(date) {
         return new Rhapsody({ date: date }).fetch({ require: true })
             .then(rhapsody => {
