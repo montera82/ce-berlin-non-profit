@@ -26,7 +26,7 @@ class RhapsodyController {
         };
         // Get today's date for rhapsody fetching
         let today = dateFormat(now, "isoDate");
-        //get date to with day for display in view
+        //get date with day for display in view
         let date = dateFormat(now, "fullDate");
         //Get rhapsody for today
         this.rhapsodyService.getRhapsodyByDate(today)
@@ -84,15 +84,21 @@ class RhapsodyController {
         let viewData = {
             menuActive: 'rhapsody'
         };
-        let params = {};
-        if (req.query.page) {
-            params.page = req.query.page;
+        let query = req.query;
+        //Get key to filter by
+        let filterBy = dateFormat(now, 'yyyy-mm');
+        if(query.month){
+           filterBy = query.month;
         }
-
-        this.rhapsodyService.listRhapsodies(params)
+        let params = {};
+        if (query.page) {
+            params.page = query.page;
+        }
+        this.rhapsodyService.listRhapsodies(filterBy, params)
             .then(data => {
                 viewData.rhapsodies = data.rhapsodies;
                 viewData.pagination = data.pagination;
+                viewData.filterBy = filterBy;
                 res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
             })
             .catch(() => {
