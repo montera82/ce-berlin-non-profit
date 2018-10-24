@@ -76,7 +76,7 @@ class RhapsodyService {
             .then(count => {
                 pages.total = count;
                 return new Rhapsody().query(qb => {
-                    qb.where(knex.raw('to_char(date, \'YYYY-MM\')'), filterBy).limit(pages.limit).offset(pages.offset);
+                    qb.where(knex.raw('to_char(date, \'YYYY-MM\')'), filterBy).limit(pages.limit).offset(pages.offset).orderBy('date', 'asc');
                 }).fetchAll();
             })
             .then(rhapsodies => {
