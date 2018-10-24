@@ -86,21 +86,19 @@ class RhapsodyController {
         };
         let query = req.query;
         //Get key to filter by
-        let filterBy = dateFormat(now, 'mm'); //returns the current month as two digit
+        let filterBy = dateFormat(now, 'yyyy-mm');
         if(query.month){
-           filterBy = query.month.length == 2? query.month : query.month.split('-')[1];
+           filterBy = query.month;
         }
         let params = {};
         if (query.page) {
             params.page = query.page;
         }
-
         this.rhapsodyService.listRhapsodies(filterBy, params)
             .then(data => {
                 viewData.rhapsodies = data.rhapsodies;
                 viewData.pagination = data.pagination;
                 viewData.filterBy = filterBy;
-                console.log(viewData.pagination);
                 res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
             })
             .catch(() => {

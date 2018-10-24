@@ -70,14 +70,13 @@ class RhapsodyService {
 
         return new Rhapsody()
             .query(qb => {
-                qb.where(knex.raw('to_char(date, \'MM\')'), filterBy);
+                qb.where(knex.raw('to_char(date, \'YYYY-MM\')'), filterBy);
             })
             .count()
             .then(count => {
-                console.log(count);
                 pages.total = count;
                 return new Rhapsody().query(qb => {
-                    qb.where(knex.raw('to_char(date, \'MM\')'), filterBy).limit(pages.limit).offset(pages.offset);
+                    qb.where(knex.raw('to_char(date, \'YYYY-MM\')'), filterBy).limit(pages.limit).offset(pages.offset);
                 }).fetchAll();
             })
             .then(rhapsodies => {
