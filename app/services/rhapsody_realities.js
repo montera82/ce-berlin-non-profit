@@ -69,10 +69,13 @@ class RhapsodyService {
         let pages = paginator.getPagination(params);
 
         return new Rhapsody()
-            .query()
+            .query(qb => {
+                qb.where(knex.raw('to_char(date, \'MM\')'), filterBy);
+            })
             .count()
             .then(count => {
-                pages.total = count[0].count;
+                console.log(count);
+                pages.total = count;
                 return new Rhapsody().query(qb => {
                     qb.where(knex.raw('to_char(date, \'MM\')'), filterBy).limit(pages.limit).offset(pages.offset);
                 }).fetchAll();

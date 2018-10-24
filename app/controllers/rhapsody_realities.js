@@ -100,6 +100,7 @@ class RhapsodyController {
                 viewData.rhapsodies = data.rhapsodies;
                 viewData.pagination = data.pagination;
                 viewData.filterBy = filterBy;
+                console.log(viewData.pagination);
                 res.render('admin_list_rhapsody', { viewData, layout: 'admin_main' });
             })
             .catch(() => {

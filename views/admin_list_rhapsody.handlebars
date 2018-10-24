@@ -57,8 +57,8 @@
                                     <div class="col-sm-6">
                                         <div id="editable-datatable_filter" class="dataTables_filter">
                                             <form class="form-inline" method="GET" action="/admin/list-rhapsody-realities">
-                                                <input class="form-control mr-sm-2" name="month" type="month" placeholder="Search"
-                                                    aria-label="Search">
+                                                <input class="form-control mr-sm-2" name="month" type="month"
+                                                    placeholder="Search" aria-label="Search">
                                                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Filter</button>
                                             </form>
                                         </div>
@@ -102,34 +102,29 @@
                 <div class="row text-center justify-content-center">
                     <nav aria-label="...">
                         <ul class="pagination">
-
                             <li class="page-item">
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.first }}&month={{viewData.filterBy}}" class="page-link"
-                                    aria-label="First">
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.first }}&month={{viewData.filterBy}}"
+                                    class="page-link {{#unless viewData.pagination.prev }}disabled{{/unless}}" aria-label="First">
                                     <span aria-hidden="true">&laquo;</span>
                                     First
                                 </a>
                             </li>
-                            {{#if viewData.pagination.prev }}
                             <li class="page-item" {{#unless viewData.pagination.prev }} class="disabled" {{/unless}}>
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.prev }}&month={{viewData.filterBy}}" class="page-link"
-                                    aria-label="Previous">
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.prev }}&month={{viewData.filterBy}}"
+                                    class="page-link {{#unless viewData.pagination.prev }}disabled{{/unless}}" aria-label="Previous">
                                     <span aria-hidden="true">&lsaquo;</span>
                                     Prev
                                 </a>
                             </li>
-                            {{/if}}
-                            {{#if viewData.pagination.next }}
                             <li class="page-item">
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.next }}&month={{viewData.filterBy}}" class="page-link"
-                                    aria-label="Next">Next
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.next }}&month={{viewData.filterBy}}"
+                                    class="page-link {{#unless viewData.pagination.next }}disabled{{/unless}}" aria-label="Next">Next
                                     <span aria-hidden="true">&rsaquo;</span>
                                 </a>
                             </li>
-                            {{/if}}
                             <li class="page-item" {{#unless viewData.pagination.next }} class="disabled" {{/unless}}>
-                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.last }}&month={{viewData.filterBy}}" class="page-link"
-                                    aria-label="Last">Last
+                                <a href="/admin/list-rhapsody-realities?page={{ viewData.pagination.last }}&month={{viewData.filterBy}}"
+                                    class="page-link {{#unless viewData.pagination.next }}disabled{{/unless}}" aria-label="Last">Last
                                     <span aria-hidden="true">&raquo;</span>
                                 </a>
                             </li>
@@ -140,4 +135,3 @@
             {{/if}}
         </div>
     </div>
-    
