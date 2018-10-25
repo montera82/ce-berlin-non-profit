@@ -182,12 +182,12 @@
 </body>
 {{!-- JavaScript --}}
 <script>
-    let date = "{{viewData.rhapsody.date}}";
-    let newDate = new Date(date);
-    let DD = newDate.getDate() < 10 ? '0' + newDate.getDate() : newDate.getDate();
-    let MM = (newDate.getMonth() + 1) < 10 ? '0' + (newDate.getMonth() + 1) : (newDate.getMonth() + 1);//Adds one because months starts at 0 not 1
-    let YYYY = newDate.getFullYear();
-    let YYYYMMDD = YYYY + '-' + MM + '-' + DD;
+    var date = "{{viewData.rhapsody.date}}";
+    var newDate = new Date(date);
+    var DD = newDate.getDate() < 10 ? '0' + newDate.getDate() : newDate.getDate();
+    var MM = (newDate.getMonth() + 1) < 10 ? '0' + (newDate.getMonth() + 1) : (newDate.getMonth() + 1);//Adds one because months starts at 0 not 1
+    var YYYY = newDate.getFullYear();
+    var YYYYMMDD = YYYY + '-' + MM + '-' + DD;
     document.getElementById("rhapsodyDate").value = YYYYMMDD;
 </script>
 

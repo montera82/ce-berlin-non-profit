@@ -10,6 +10,6 @@ exports.up = function (knex) {
 exports.down = function (knex) {
     return knex.schema
         .table('rhapsody', function (table) {
-            table.dropColumn('date');
+            table.dropUnique('date');
         });
 };

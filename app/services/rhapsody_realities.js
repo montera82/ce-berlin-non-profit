@@ -137,22 +137,7 @@ class RhapsodyService {
                 throw new error.UnknownError('an unknown error occured');
             })
     }
-
-    /**
-    * Get one rhapsody by date
-    */
-    getRhapsodyByDate(date) {
-        return new Rhapsody({ date: date }).fetch({ require: true })
-            .then(rhapsody => {
-                this.logger.info('Successfully fetched rhapsody, RhapsodyID: ' + rhapsody.id);
-                return rhapsody.toJSON();
-            })
-            .catch(err => {
-                this.logger.info('Failed to fetch rhapsody', err.message);
-                throw new error.UnknownError('an unknown error occured');
-            })
-    }
-
+    
     /**
      * Update a rhapsody
      */

@@ -2,6 +2,7 @@
 
 let Bookshelf = require('app/bookshelf');
 let errors = require('app/errors');
+const ERR_CODE_UNIQUE_VIOLATION_POSTGRES = '23505';
 
 let Rhapsody = Bookshelf.Model.extend({
     tableName: 'rhapsody',
@@ -10,7 +11,7 @@ let Rhapsody = Bookshelf.Model.extend({
     save: function () {
         return Bookshelf.Model.prototype.save.apply(this, arguments)
             .catch(err => {
-                if (err.code === '23505') { //unique field violiation
+                if (err.code === ERR_CODE_UNIQUE_VIOLATION_POSTGRES) { //unique field violiation
                     throw new errors.DuplicateDate('Date already exist');
                 }
                 throw err;
