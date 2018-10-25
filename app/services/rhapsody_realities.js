@@ -42,12 +42,15 @@ class RhapsodyService {
                     return rhapsody;
                 })
                 .catch(err => {
-                    this.logger.error('failed to create rhapsody', err.message);
-                    throw new errors.UnknownError('an error occurred');
+                    this.logger.error('failed to create rhapsody: ' + err.message);
+                    throw err;
                 });
         });
     }
 
+    /**
+        * Backend validation for all input fields
+    */
     validateRhapsodyData(req) {
         req.checkBody('title', 'Title field is required').notEmpty();
         req.checkBody('opening_verse', 'Opening verse field is required').notEmpty();
@@ -80,7 +83,7 @@ class RhapsodyService {
                 }).fetchAll();
             })
             .then(rhapsodies => {
-                this.logger.info('successfully fetched Rhapsodies');
+                this.logger.info('successfully fetched rhapsodies');
                 pagination = paginator.paginate({
                     limit: pages.limit,
                     offset: pages.offset,
@@ -112,9 +115,9 @@ class RhapsodyService {
             })
     }
 
-     /**
-     * Get one rhapsody by date
-     */
+    /**
+    * Get one rhapsody by date
+    */
     getRhapsodyByDate(date) {
         return new Rhapsody({ date: date }).fetch({ require: true })
             .then(rhapsody => {
@@ -148,8 +151,8 @@ class RhapsodyService {
                     return rhapsody;
                 })
                 .catch(err => {
-                    this.logger.info('Failed to update rhapsody', err.message);
-                    throw new error.UnknownError('an unknown error occured');
+                    this.logger.info('Failed to update rhapsody: ' + err.message);
+                    throw err;
                 });
         });
     }
