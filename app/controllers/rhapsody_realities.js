@@ -1,4 +1,5 @@
 'use strict';
+let errors = require('app/errors');
 let dateFormat = require('dateformat');
 let now = Date();
 
@@ -62,22 +63,21 @@ class RhapsodyController {
             req.flash('error', errorMessages);
             return res.render('admin_add_rhapsody', { layout: 'admin_main' });
         }
-        //Check if rhapsody already exists before adding
-        this.rhapsodyService.doesRhapsodyExist(body.date)
-            .then(resp => {
-                if (resp == true) {
-                    req.flash('error', 'Rhapsody already exists');
-                    return res.render('admin_add_rhapsody', { layout: 'admin_main' });
-                } else {
-                    this.rhapsodyService.createRhapsody(body)
-                        .then(() => {
-                            req.flash('success', 'saved successfully!')
-                            res.render('admin_add_rhapsody', { layout: 'admin_main' });
-                        })
-                        .catch((err) => {
-                            req.flash('error', 'saving failed!')
-                            res.render('admin_add_rhapsody', { layout: 'admin_main' });
-                        });
+
+        this.rhapsodyService.createRhapsody(body)
+            .then(() => {
+                req.flash('success', 'saved successfully!')
+                res.render('admin_add_rhapsody', { layout: 'admin_main' });
+            })
+            .catch((err) => {
+                switch (err.constructor) {
+                    case errors.DuplicateDate:
+                        req.flash('error', 'Rhapsody already exists for the date you entered');
+                        res.render('admin_add_rhapsody', { layout: 'admin_main' });
+                        break;
+                    default:
+                        req.flash('error', 'Saving failed!')
+                        res.render('admin_add_rhapsody', { layout: 'admin_main' });
                 }
             });
     }
@@ -169,10 +169,19 @@ class RhapsodyController {
                 res.redirect('/admin/list-rhapsody-realities');
             })
             .catch(err => {
-                viewData.rhapsody = body;
-                viewData.rhapsody.id = rhapsodyId;
-                req.flash('error', 'An unknown error has occurred, Please try again');
-                res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
+                switch (err.constructor) {
+                    case errors.DuplicateDate:
+                        viewData.rhapsody = body;
+                        viewData.rhapsody.id = rhapsodyId;
+                        req.flash('error', 'Rhapsody already exists for the date you entered');
+                        res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
+                        break;
+                    default:
+                        viewData.rhapsody = body;
+                        viewData.rhapsody.id = rhapsodyId;
+                        req.flash('error', 'Failed to update, An unknown error occurred');
+                        res.render('admin_edit_rhapsody', { viewData, layout: 'admin_main' });
+                }
             });
     }
 }
