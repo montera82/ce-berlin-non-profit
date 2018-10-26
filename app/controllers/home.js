@@ -25,10 +25,21 @@ class HomeController
         let viewData = {
             menuActive: 'home'
         };
-
         //call the Home service here to fetch stuffs from the DB e.t.c before redendering content
         res.render('home', viewData);
         
+    }
+
+    /**
+     * Returns view for changing slider images
+     *
+     */
+    getChangeSlider(req, res) {
+
+        let viewData = {
+            menuActive: 'home'
+        };
+        res.render('admin_upload_slider', {layout: 'admin_main'});
     }
 }
 
