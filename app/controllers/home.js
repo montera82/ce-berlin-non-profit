@@ -34,7 +34,7 @@ class HomeController
      * Returns view for changing slider images
      *
      */
-    getChangeSlider(req, res) {
+    getChangeSliderView(req, res) {
 
         let viewData = {
             menuActive: 'home'
