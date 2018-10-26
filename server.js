@@ -4,6 +4,7 @@ let path = require('path');
 let bodyParser = require('body-parser');
 let session = require('express-session');
 let expressValidator = require('express-validator');
+let fileUploader = require('express-fileupload');
 
 let app = express();
 let serviceLocator = require('app/config/dependency_container');
@@ -21,6 +22,9 @@ app.set('view engine', 'handlebars');
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// for handling file uploads
+app.use(fileUploader());
 
 //flash messages
 app.use(require('connect-flash')());
