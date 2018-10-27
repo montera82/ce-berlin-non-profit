@@ -1,16 +1,14 @@
 'use strict';
 
-class HomeController
-{
+class HomeController {
     /**
      * @constructor
      *
      * @param HomeService
      * @param logger
      */
-    constructor(HomeService, logger)
-    {
-        this.HomeService = HomeService;
+    constructor(HomeService, logger) {
+        this.homeService = HomeService;
         this.logger = logger;
     }
 
@@ -27,7 +25,7 @@ class HomeController
         };
         //call the Home service here to fetch stuffs from the DB e.t.c before redendering content
         res.render('home', viewData);
-        
+
     }
 
     /**
@@ -39,7 +37,29 @@ class HomeController
         let viewData = {
             menuActive: 'home'
         };
-        res.render('admin_upload_slider', {layout: 'admin_main'});
+        res.render('admin_upload_slider', { layout: 'admin_main' });
+    }
+
+    /**
+     * Changes the slider view
+     *
+     */
+    ChangeSliderImage(req, res) {
+
+        let viewData = {
+            menuActive: 'home'
+        };
+        this.homeService.uploadSliderImages(req, res)
+            .then( collection => {
+                viewData.sliders = collection;
+                console.log(viewData.sliders[0].attributes.image_url);
+                req.flash('success', 'Sliders uploaded successfully');
+                res.render('admin_upload_slider', {viewData, layout: 'admin_main'});
+            })
+            .catch( err => {
+                req.flash('error', 'Failed to upload sliders');
+                res.render('admin_upload_slider', { layout: 'admin_main'});
+            });
     }
 }
 
