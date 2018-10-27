@@ -27,4 +27,5 @@ module.exports.setup = function setup(app, serviceLocator) {
     app.get('/admin/edit-rhapsody-realities/:id',  (req, res, next) => rhapsodyController.editView(req, res, next));
     app.post('/admin/edit-rhapsody-realities/:id',  (req, res, next) => rhapsodyController.update(req, res, next));
     app.get('/admin/change-slider-images',  (req, res, next) => homeController.getChangeSliderView(req, res, next));
+    app.post('/admin/change-slider-images',  (req, res, next) => homeController.ChangeSliderImage(req, res, next));
 };
