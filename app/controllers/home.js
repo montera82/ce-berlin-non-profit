@@ -37,7 +37,16 @@ class HomeController {
         let viewData = {
             menuActive: 'home'
         };
-        res.render('admin_upload_slider', { layout: 'admin_main' });
+        this.homeService.getCurrentSliders()
+            .then( sliders => {
+                console.log(sliders.models[0].attributes);
+                viewData.sliders = sliders.models;
+                res.render('admin_upload_slider', { viewData, layout: 'admin_main'});
+            })
+            .catch( err => {
+                req.flash('error', 'Unable to fetch current sliders');
+                res.render('admin_upload_slider', {layout: 'admin_main'});
+            });
     }
 
     /**
@@ -52,7 +61,6 @@ class HomeController {
         this.homeService.uploadSliderImages(req, res)
             .then( collection => {
                 viewData.sliders = collection;
-                console.log(viewData.sliders[0].attributes.image_url);
                 req.flash('success', 'Sliders uploaded successfully');
                 res.render('admin_upload_slider', {viewData, layout: 'admin_main'});
             })
