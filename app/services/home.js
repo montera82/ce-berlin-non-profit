@@ -34,7 +34,7 @@ class HomeService {
         let slider3 = req.files.slider3;
 
         if (slider1) {
-            slider1.mv('public/sliders/'  + slider1.name, err => {
+            slider1.mv('public/sliders/' + slider1.name, err => {
                 if (err) {
                     this.logger.error('Failed to move slider 1');
                     throw err;
@@ -63,15 +63,34 @@ class HomeService {
             { image_url: '/sliders/' + slider2.name },
             { image_url: '/sliders/' + slider3.name },
         ])
-        .invokeThen('save')
-        .then( collection => {
-            this.logger.info('Sliders uploaded successfully');
-            return collection;
+            .invokeThen('save')
+            .then(collection => {
+                this.logger.info('Sliders uploaded successfully');
+                return collection;
+            })
+            .catch(err => {
+                this.logger.error('Failed to save image path' + err.message);
+                throw err;
+            });
+    }
+
+    /**
+     * Retrieves the last three image urls as the currnet sliders
+     */
+    getCurrentSliders() {
+        return new Slider().query(qb => {
+            qb.orderBy('id', 'desc')
+                .limit(3);
         })
-        .catch(err => {
-            this.logger.error('Failed to save image path' + err.message);
-            throw err;
-        });
+            .fetchAll()
+            .then(sliders => {
+                this.logger.info('Current sliders fetched successfully');
+                return sliders;
+            })
+            .catch(err => {
+                this.logger.error('Failed to fetch current sliders: ' + err);
+                throw err;
+            })
     }
 }
 
