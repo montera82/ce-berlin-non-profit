@@ -38,7 +38,7 @@ class RhapsodyController {
             })
             .catch(err => {
                 req.flash('error', 'No Rhpasody was entered for today, kindly contact the admin');
-                res.render('show_rhapsody', { viewData });
+                res.render('show_rhapsody', viewData);
             });
     }
 

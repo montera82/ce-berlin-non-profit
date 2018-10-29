@@ -11,7 +11,10 @@ module.exports.setup = function setup(app, serviceLocator) {
     app.get('/', (req, res, next) => homeController.index(req, res, next));
     app.get('/rhapsody-realities',  (req, res, next) => rhapsodyController.index(req, res, next));
     app.get('/church-service', function (req, res, next) {
-        res.render('church_service');
+        let viewData = {
+            menuActive: 'churchService'
+        };
+        res.render('church_service', viewData);
     });
 
     //Admin Routes
