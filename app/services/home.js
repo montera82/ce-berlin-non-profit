@@ -25,7 +25,7 @@ class HomeService {
      * Handele upload of slider images
      */
     uploadSliderImages(req, res) {
-        if (Object.keys(req.files).length == 0) {
+        if (Object.keys(req.files).length === 0) {
             this.logger.error('No slider was selected for upload');
             throw new errors.NoSliderSelected('No slider was selected for upload');
         }
