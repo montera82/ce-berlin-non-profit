@@ -1,4 +1,5 @@
 'use strict';
+let errors = require('app/errors');
 
 class HomeController {
     /**
@@ -39,7 +40,6 @@ class HomeController {
         };
         this.homeService.getCurrentSliders()
             .then( sliders => {
-                console.log(sliders.models[0].attributes);
                 viewData.sliders = sliders.models;
                 res.render('admin_upload_slider', { viewData, layout: 'admin_main'});
             })
@@ -65,8 +65,15 @@ class HomeController {
                 res.render('admin_upload_slider', {viewData, layout: 'admin_main'});
             })
             .catch( err => {
-                req.flash('error', 'Failed to upload sliders');
-                res.render('admin_upload_slider', { layout: 'admin_main'});
+                switch (err.constructor) {
+                    case errors.NoSliderSelected:
+                        res.redirect('/admin/change-slider-images');
+                        break;
+                    default:
+                        req.flash('error', 'Failed to upload sliders');
+                        res.render('admin_upload_slider', { layout: 'admin_main'});
+                        break;
+                }
             });
     }
 }

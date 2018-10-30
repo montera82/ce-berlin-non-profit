@@ -68,14 +68,11 @@
             <div class="row">
                 <!-- column -->
                 <div class="col-3">
-                    <script>
-                        var viewData = "{{viewData.sliders.[0].attributes.image_url}}";
-                        console.log("yes: " + viewData);
-                    </script>
+                    
                 </div>
                 <div class="col-6">
                     <div class="pull-right mb-2">
-                        <input name="slider1" class="btn btn-info" type="file">
+                        <input name="slider1" class="btn btn-info" type="file" value={{{viewData.sliders.[0].attributes.image_url}}}>
                     </div>
                     <img src={{{viewData.sliders.[0].attributes.image_url}}} class="img-fluid" alt="Responsive image" style="height:250px; width:600px">
                 </div>
@@ -91,7 +88,7 @@
                 </div>
                 <div class="col-6">
                     <div class="pull-right mb-2">
-                        <input name="slider2" class="btn btn-info" type="file">
+                        <input name="slider2" class="btn btn-info" type="file" value={{{viewData.sliders.[1].attributes.image_url}}}>
                     </div>
                     <img src={{{viewData.sliders.[1].attributes.image_url}}} class="img-fluid" alt="Responsive image" style="height:250px; width:600px">
                 </div>
@@ -106,7 +103,7 @@
                 </div>
                 <div class="col-6">
                     <div class="pull-right mb-2">
-                        <input name="slider3" class="btn btn-info" type="file">
+                        <input name="slider3" class="btn btn-info" type="file" value={{{viewData.sliders.[2].attributes.image_url}}}>
                     </div>
                     <img src={{{viewData.sliders.[2].attributes.image_url}}} class="img-fluid" alt="Responsive image" style="height:250px; width:600px">
                 </div>
