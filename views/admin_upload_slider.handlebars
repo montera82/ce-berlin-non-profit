@@ -52,11 +52,13 @@
             </div>
             <div class="col-6">
                 <div id="editable-datatable_filter" class="dataTables_filter pull-right">
-                    <form class="form-inline" method="GET" action="/admin/list-rhapsody-realities">
-                        <input class="form-control mr-sm-2" name="month" type="input" placeholder="File uploader"
-                            aria-label="Search">
-                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Upload</button>
-                    </form>
+                    <div>
+                        <form class="form-inline" method="POST" action="/admin/change-slider-images?id={{viewData.sliderId}}" encType="multipart/form-data">
+                            <input class=" btn btn-outline-success my-2 my-sm-0" name="slider" type="file"
+                                {{#unless viewData.sliderId }} disabled {{/unless}}>
+                            <button class="btn btn-outline-success " {{#unless viewData.sliderId }} disabled {{/unless}}>Submit</button>
+                        </form>
+                    </div>
                 </div>
             </div>
             <div class="col-3">
@@ -68,13 +70,14 @@
             <div class="row">
                 <!-- column -->
                 <div class="col-3">
-                    
+
                 </div>
                 <div class="col-6">
                     <div class="pull-right mb-2">
-                        <input name="slider1" class="btn btn-info" type="file" value={{{viewData.sliders.[0].attributes.image_url}}}>
+                        <a href="/admin/change-slider-images?id=0" class="btn btn-info">Select</a>
                     </div>
-                    <img src={{{viewData.sliders.[0].attributes.image_url}}} class="img-fluid" alt="Responsive image" style="height:250px; width:600px">
+                    <img src={{viewData.sliders.[0].attributes.image_url}} class="img-fluid" alt="Responsive image"
+                        style="height:250px; width:600px">
                 </div>
                 <div class="col-3">
 
@@ -88,9 +91,10 @@
                 </div>
                 <div class="col-6">
                     <div class="pull-right mb-2">
-                        <input name="slider2" class="btn btn-info" type="file" value={{{viewData.sliders.[1].attributes.image_url}}}>
+                        <a href="/admin/change-slider-images?id=1" class="btn btn-info">Select</a>
                     </div>
-                    <img src={{{viewData.sliders.[1].attributes.image_url}}} class="img-fluid" alt="Responsive image" style="height:250px; width:600px">
+                    <img src={{viewData.sliders.[1].attributes.image_url}} class="img-fluid" alt="Responsive image"
+                        style="height:250px; width:600px">
                 </div>
                 <div class="col-3">
                 </div>
@@ -103,24 +107,10 @@
                 </div>
                 <div class="col-6">
                     <div class="pull-right mb-2">
-                        <input name="slider3" class="btn btn-info" type="file" value={{{viewData.sliders.[2].attributes.image_url}}}>
+                        <a href="/admin/change-slider-images?id=2" class="btn btn-info">Select</a>
                     </div>
-                    <img src={{{viewData.sliders.[2].attributes.image_url}}} class="img-fluid" alt="Responsive image" style="height:250px; width:600px">
-                </div>
-                <div class="col-3">
-
-                </div>
-            </div>
-
-            <div class="row">
-                <!-- column -->
-                <div class="col-3">
-
-                </div>
-                <div class="col-6">
-                    <div class="pull-right mt-2">
-                        <input type="submit" class="btn btn-info btn-md">
-                    </div>
+                    <img src={{viewData.sliders.[2].attributes.image_url}} class="img-fluid" alt="Responsive image"
+                        style="height:250px; width:600px">
                 </div>
                 <div class="col-3">
 

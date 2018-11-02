@@ -125,11 +125,11 @@ class RhapsodyController {
         let viewData = {
             menuActive: 'rhapsody'
         };
-        let rhapsodyId = req.params.id;
-        if (!rhapsodyId) {
+        if (!req.params.hasOwnProperty('id')) {
             req.flash('error', 'No Rhapsody ID specified');
             res.redirect('/admin/list-rhapsody-realities');
         }
+        let rhapsodyId = req.params.id;
         this.rhapsodyService.getRhapsodyByID(rhapsodyId)
             .then(rhapsody => {
                 viewData.rhapsody = rhapsody;

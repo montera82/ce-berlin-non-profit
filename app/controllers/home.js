@@ -38,9 +38,12 @@ class HomeController {
         let viewData = {
             menuActive: 'home'
         };
+        if(req.query.hasOwnProperty('id')){
+            viewData.sliderId = req.query.id;
+        }
         this.homeService.getCurrentSliders()
-            .then( sliders => {
-                viewData.sliders = sliders.models;
+            .then( collection => {
+                viewData.sliders = collection.models;
                 res.render('admin_upload_slider', { viewData, layout: 'admin_main'});
             })
             .catch( err => {
@@ -59,8 +62,8 @@ class HomeController {
             menuActive: 'home'
         };
         this.homeService.uploadSliderImages(req, res)
-            .then( collection => {
-                viewData.sliders = collection;
+            .then( collections => {
+                viewData.sliders = collections;
                 req.flash('success', 'Sliders uploaded successfully');
                 res.render('admin_upload_slider', {viewData, layout: 'admin_main'});
             })
