@@ -38,22 +38,22 @@ class HomeController {
         let viewData = {
             menuActive: 'home'
         };
-        if(req.query.hasOwnProperty('id')){
+        if (req.query.hasOwnProperty('id')) {
             viewData.sliderId = req.query.id;
         }
-        this.homeService.getCurrentSliders()
-            .then( collection => {
+        viewData.sliders = this.homeService.getCurrentSliders()
+            .then(collection => {
                 viewData.sliders = collection.models;
-                res.render('admin_upload_slider', { viewData, layout: 'admin_main'});
+                res.render('admin_upload_slider', { viewData, layout: 'admin_main' });
             })
-            .catch( err => {
+            .catch(err => {
                 req.flash('error', 'Unable to fetch current sliders');
-                res.render('admin_upload_slider', {layout: 'admin_main'});
+                res.render('admin_upload_slider', { layout: 'admin_main' });
             });
     }
 
     /**
-     * Changes the slider view
+     * Changes the slider images
      *
      */
     ChangeSliderImage(req, res) {
@@ -62,19 +62,19 @@ class HomeController {
             menuActive: 'home'
         };
         this.homeService.uploadSliderImages(req, res)
-            .then( collections => {
-                viewData.sliders = collections;
+            .then(collections => {
+                viewData.sliders = collections.models;
                 req.flash('success', 'Sliders uploaded successfully');
-                res.render('admin_upload_slider', {viewData, layout: 'admin_main'});
+                res.render('admin_upload_slider', { viewData, layout: 'admin_main' });
             })
-            .catch( err => {
+            .catch(err => {
                 switch (err.constructor) {
                     case errors.NoSliderSelected:
                         res.redirect('/admin/change-slider-images');
                         break;
                     default:
                         req.flash('error', 'Failed to upload sliders');
-                        res.render('admin_upload_slider', { layout: 'admin_main'});
+                        res.render('admin_upload_slider', { layout: 'admin_main' });
                         break;
                 }
             });
