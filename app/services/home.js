@@ -31,16 +31,24 @@ class HomeService {
         }
         if (req.files.hasOwnProperty('slider')) {
             let slider = req.files.slider;
+            let slider_id = req.query.id;
             slider.mv('public/sliders/' + slider.name, err => {
                 if (err) {
                     this.logger.error('Failed to move slider');
                     throw err;
                 }
             });
-            return new Slider().save({ image_url: '/sliders/' + slider.name }, { method: 'insert' })
-                .then(collection => {
+            return new Slider().save({ image_url: '/sliders/' + slider.name, created_at: new Date(), updated_at: new Date(), slider_id }, { method: 'insert' })
+                .then(() => {
                     this.logger.info('Sliders uploaded successfully');
-                    return collection;
+                    //Call  method responsible for getting last three image urls as current sliders
+                    return this.getCurrentSliders()
+                        .then(collections => {
+                            return collections;
+                        })
+                        .catch(err => {
+                            throw err;
+                        });
                 })
                 .catch(err => {
                     this.logger.error('Failed to save image path' + err.message);
@@ -50,7 +58,7 @@ class HomeService {
     }
 
     /**
-     * Retrieves the last three image urls as the currnet sliders
+     * Retrieves the last three image urls as the current sliders
      */
     getCurrentSliders() {
         return new Slider().query(qb => {
