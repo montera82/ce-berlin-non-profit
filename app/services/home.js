@@ -38,15 +38,16 @@ class HomeService {
                     throw err;
                 }
             });
-            return new Slider().save({ image_url: '/sliders/' + slider.name, created_at: new Date(), updated_at: new Date(), slider_id }, { method: 'insert' })
+            return new Slider({ id: slider_id }).save({ image_url: '/sliders/' + slider.name }, { method: 'update' })
                 .then(() => {
                     this.logger.info('Sliders uploaded successfully');
-                    //Call  method responsible for getting last three image urls as current sliders
+                    //Call method responsible for getting last three image urls as current sliders
                     return this.getCurrentSliders()
                         .then(collections => {
                             return collections;
                         })
                         .catch(err => {
+                            this.logger.error('Unable to fetch current sliders');
                             throw err;
                         });
                 })
@@ -61,10 +62,7 @@ class HomeService {
      * Retrieves the last three image urls as the current sliders
      */
     getCurrentSliders() {
-        return new Slider().query(qb => {
-            qb.orderBy('id', 'desc')
-                .limit(3);
-        })
+        return new Slider().query()
             .fetchAll()
             .then(sliders => {
                 this.logger.info('Current sliders fetched successfully');

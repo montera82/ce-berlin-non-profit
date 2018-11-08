@@ -5,11 +5,11 @@ class HomeController {
     /**
      * @constructor
      *
-     * @param HomeService
+     * @param homeService
      * @param logger
      */
-    constructor(HomeService, logger) {
-        this.homeService = HomeService;
+    constructor(homeService, logger) {
+        this.homeService = homeService;
         this.logger = logger;
     }
 
@@ -24,9 +24,15 @@ class HomeController {
         let viewData = {
             menuActive: 'home'
         };
-        //call the Home service here to fetch stuffs from the DB e.t.c before redendering content
-        res.render('home', viewData);
-
+        this.homeService.getCurrentSliders()
+            .then(collections => {
+                viewData.sliders = collections.models;
+                res.render('home', viewData);
+            })
+            .catch(err => {
+                req.flash('error', 'Unable to fetch sliders');
+                res.render('home', viewData);
+            });
     }
 
     /**
