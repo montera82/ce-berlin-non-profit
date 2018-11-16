@@ -52,7 +52,7 @@ class HomeService {
                         });
                 })
                 .catch(err => {
-                    this.logger.error('Failed to save image path' + err.message);
+                    this.logger.error('Failed to save image path ' + err.message);
                     throw err;
                 });
         }
@@ -62,7 +62,7 @@ class HomeService {
      * Retrieves the last three image urls as the current sliders
      */
     getCurrentSliders() {
-        return new Slider().query()
+        return new Slider()
             .fetchAll()
             .then(sliders => {
                 this.logger.info('Current sliders fetched successfully');
