@@ -3,10 +3,6 @@ let errors = require('app/errors');
 let Slider = require('app/models/slider');
 let Bookshelf = require('app/bookshelf');
 
-let Sliders = Bookshelf.Collection.extend({
-    model: Slider
-});
-
 class HomeService {
 
     /**
