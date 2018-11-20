@@ -25,13 +25,13 @@ class HomeController {
             menuActive: 'home'
         };
         this.homeService.getCurrentSliders()
-            .then(collections => {
-                viewData.sliders = collections.models;
-                res.render('home', viewData);
+            .then(sliders => {
+                viewData.sliders = sliders;
+                res.render('home', { viewData });
             })
             .catch(err => {
                 req.flash('error', 'Unable to fetch sliders');
-                res.render('home', viewData);
+                res.render('home', { viewData });
             });
     }
 
@@ -48,8 +48,8 @@ class HomeController {
             viewData.sliderId = req.query.id;
         }
         viewData.sliders = this.homeService.getCurrentSliders()
-            .then(collection => {
-                viewData.sliders = collection.models;
+            .then(sliders => {
+                viewData.sliders = sliders;
                 res.render('admin_upload_slider', { viewData, layout: 'admin_main' });
             })
             .catch(err => {
@@ -68,8 +68,8 @@ class HomeController {
             menuActive: 'home'
         };
         this.homeService.uploadSliderImages(req, res)
-            .then(collections => {
-                viewData.sliders = collections.models;
+            .then(sliders => {
+                viewData.sliders = sliders;
                 req.flash('success', 'Sliders uploaded successfully');
                 res.render('admin_upload_slider', { viewData, layout: 'admin_main' });
             })

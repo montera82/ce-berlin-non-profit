@@ -16,7 +16,7 @@
         data-mousewheel="false" data-keyboard="false" id="home" data-frame-fill="url(#gradient1)">
         <div class="swiper-wrapper">
             <div class="swiper-slide">
-                <div class="swiper-slide-img" style="background-image: url({{viewData.sliders.[1].attributes.image_url}});"
+                <div class="swiper-slide-img" style="background-image: url({{{viewData.sliders.[1].image_url}}});"
                     data-swiper-anime="{ &quot;animation&quot;: &quot;swiperSlideRide&quot;, &quot;duration&quot;: 1800 }"></div>
                 <div class="swiper-slide-caption">
                     <p class="lead text-white" data-swiper-anime="{ &quot;animation&quot;: &quot;swiperContentRide&quot;, &quot;duration&quot;: 600, &quot;delay&quot;: 500 }">Salt
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="swiper-slide-img" style="background-image: url({{viewData.sliders.[2].attributes.image_url}});"
+                <div class="swiper-slide-img" style="background-image: url({{{viewData.sliders.[2].image_url}}});"
                     data-swiper-anime="{ &quot;animation&quot;: &quot;swiperSlideRide&quot;, &quot;duration&quot;: 1800 }"></div>
                 <div class="swiper-slide-caption">
                     <p class="lead text-white" data-swiper-anime="{ &quot;animation&quot;: &quot;swiperContentRide&quot;, &quot;duration&quot;: 600, &quot;delay&quot;: 500 }">ONLY
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="swiper-slide">
-                <div class="swiper-slide-img" style="background-image: url({{viewData.sliders.[3].attributes.image_url}});"
+                <div class="swiper-slide-img" style="background-image: url({{{viewData.sliders.[3].image_url}}});"
                     data-swiper-anime="{ &quot;animation&quot;: &quot;swiperSlideRide&quot;, &quot;duration&quot;: 1800 }"></div>
                 <div class="swiper-slide-caption context-light">
                     <p class="lead text-white" data-swiper-anime="{ &quot;animation&quot;: &quot;swiperContentRide&quot;, &quot;duration&quot;: 600, &quot;delay&quot;: 500 }">Innovations
@@ -58,12 +58,11 @@
         <div class="swiper-button-prev"></div>
         <div class="swiper-button-next"></div>
     </div>
-    <script>
-        let viewData = "{{viewData.sliders.[3].attributes.image_url}}";
-        console.log(viewData);
-        console.log('```````````````````````````');
-    </script>
 
+<script>
+    var viewData = "{{viewData.sliders.[3].image_url}}";
+        console.log(viewData);
+</script>
     <section class="wow fadeIn xs-text-center no-inset-top" id="about" style="margin-top: 50px">
         <div class="container-fluid no-inset">
             <div class="row no-margin equalize sm-equalize-auto">
@@ -172,7 +171,6 @@
             </div>
         </div>
     </section>
-
     <section style="margin-top: 50px" class="wow xs-text-center no-inset-top" id="healing-school">
         <div class="container-fluid no-inset">
             <div class="row no-margin equalize sm-equalize-auto">

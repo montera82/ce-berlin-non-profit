@@ -41,10 +41,10 @@ class HomeService {
             return new Slider({ id: slider_id }).save({ image_url: '/sliders/' + slider.name }, { method: 'update' })
                 .then(() => {
                     this.logger.info('Sliders uploaded successfully');
-                    //Call method responsible for getting last three image urls as current sliders
+                    //Call method responsible for getting the current sliders
                     return this.getCurrentSliders()
-                        .then(collections => {
-                            return collections;
+                        .then(sliders => {
+                            return sliders;
                         })
                         .catch(err => {
                             this.logger.error('Unable to fetch current sliders');
@@ -64,7 +64,11 @@ class HomeService {
     getCurrentSliders() {
         return new Slider()
             .fetchAll()
-            .then(sliders => {
+            .then(collections => {
+                let sliders = {};
+                for (let item of collections.models) {
+                    sliders[item.attributes.id] = item.attributes;
+                }
                 this.logger.info('Current sliders fetched successfully');
                 return sliders;
             })
