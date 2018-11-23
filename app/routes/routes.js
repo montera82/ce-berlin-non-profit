@@ -17,6 +17,9 @@ module.exports.setup = function setup(app, serviceLocator) {
         res.render('church_service', viewData);
     });
 
+    app.get('/kings-pay', (req, res, next) => homeController.kingsPay(req, res, next));
+    
+
     //Admin Routes
     app.get('/admin/',  function (req, res, next) {
         res.render('admin_dashboard', {layout : 'admin_main'});

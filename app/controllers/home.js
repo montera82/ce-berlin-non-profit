@@ -30,6 +30,13 @@ class HomeController
         
     }
 
+    kingsPay(req, res) {
+        let viewData = {
+            menuActive: 'home'
+        };
+        res.render('kings_pay', viewData);
+    }
+
     /**
      * Returns view for changing slider images
      *

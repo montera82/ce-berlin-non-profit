@@ -1,0 +1,19 @@
+
+<svg width="768px" height="1024px" viewBox="0 0 768 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="88.2583333%" y1="121.122685%" x2="24.7875%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#74DA67" offset="0%"></stop>
+            <stop stop-color="#26B09F" offset="98.4284682%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Launch-Screens" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="iPad" fill="url(#linearGradient-1)">
+            <g id="bg-ipad" transform="translate(-357.000000, -114.000000)">
+                <rect id="Rectangle-6" fill-opacity="0.5" transform="translate(1064.000000, 807.500000) rotate(-22.000000) translate(-1064.000000, -807.500000) " x="757" y="452.5" width="614" height="710" rx="50"></rect>
+                <rect id="Rectangle-6" fill-opacity="0.400000006" transform="translate(418.000000, 444.500000) rotate(-22.000000) translate(-418.000000, -444.500000) " x="111" y="89.5" width="614" height="710" rx="50"></rect>
+            </g>
+        </g>
+    </g>
+</svg>
