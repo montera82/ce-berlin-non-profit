@@ -18,5 +18,26 @@
 }
 
 #middle{
-    margin-top: 130px;
+    margin-top: 50px;
+}
+
+.btn{
+    border: 0px solid;
+    padding: 10px;
+    box-shadow: 1px 1px #888880;
+}
+
+.btn-lg {
+    border-radius: 4px;
+    margin: 18px 0 0px 88px;
+    
+    
+}
+.fa{
+    background-color:#6f6f6f;
+    border-radius: 4px;   
+}
+.fa-check{
+    color: white;
+    padding: 4px;
 }
