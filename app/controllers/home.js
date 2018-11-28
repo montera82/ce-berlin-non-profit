@@ -66,6 +66,28 @@ class HomeController {
     }
 
     /**
+     * Returns view for changing body images
+     *
+     */
+    getChangeBodyImagesView() {
+        let viewData = {
+            menuActive: 'home'
+        };
+        if (req.query.hasOwnProperty('id')) {
+            viewData.sliderId = req.query.id;
+        }
+        viewData.sliders = this.homeService.getCurrentSliders()
+            .then(sliders => {
+                viewData.sliders = sliders;
+                res.render('admin_upload_slider', { viewData, layout: 'admin_main' });
+            })
+            .catch(err => {
+                req.flash('error', 'Unable to fetch current sliders');
+                res.render('admin_upload_slider', { layout: 'admin_main' });
+            });
+    }
+
+    /**
      * Changes the slider images
      *
      */
