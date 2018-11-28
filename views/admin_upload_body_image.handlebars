@@ -55,7 +55,7 @@
                     <div>
                         <form class="form-inline" method="POST" action="/admin/change-body-images?id={{viewData.imageId}}"
                             encType="multipart/form-data">
-                            <input class=" btn btn-outline-success my-2 my-sm-0" name="slider" type="file"
+                            <input class=" btn btn-outline-success my-2 my-sm-0" name="image" type="file"
                                 {{#unless viewData.imageId }} disabled {{/unless}}>
                             <button class="btn btn-outline-success" {{#unless viewData.imageId }} disabled {{/unless}}>Submit</button>
                         </form>

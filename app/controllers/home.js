@@ -118,6 +118,34 @@ class HomeController {
                 }
             });
     }
+
+    /**
+     * Changes the body images
+     *
+     */
+    ChangeBodyImages(req, res) {
+
+        let viewData = {
+            menuActive: 'home'
+        };
+        this.homeService.uploadBodyImages(req, res)
+            .then(images => {
+                viewData.images = images;
+                req.flash('success', 'Body image uploaded successfully');
+                res.render('admin_upload_body_image', { viewData, layout: 'admin_main' });
+            })
+            .catch(err => {
+                switch (err.constructor) {
+                    case errors.NoSliderSelected:
+                        res.redirect('/admin/change-body-images');
+                        break;
+                    default:
+                        req.flash('error', 'Failed to upload body image');
+                        res.render('admin_upload_body_image', { layout: 'admin_main' });
+                        break;
+                }
+            });
+    }
 }
 
 module.exports = HomeController;
