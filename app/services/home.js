@@ -73,6 +73,26 @@ class HomeService {
                 throw err;
             })
     }
+
+    /**
+     * Retrieves the last three image urls as the current sliders
+     */
+    getCurrentSliders() {
+        return new Slider()
+            .fetchAll()
+            .then(collections => {
+                let sliders = {};
+                for (let item of collections.models) {
+                    sliders[item.attributes.id] = item.attributes;
+                }
+                this.logger.info('Current sliders fetched successfully');
+                return sliders;
+            })
+            .catch(err => {
+                this.logger.error('Failed to fetch current sliders: ' + err);
+                throw err;
+            })
+    }
 }
 
 module.exports = HomeService;
