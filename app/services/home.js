@@ -1,6 +1,7 @@
 'use strict';
 let errors = require('app/errors');
 let Slider = require('app/models/slider');
+let BodyImage = require('app/models/bodyImage');
 let Bookshelf = require('app/bookshelf');
 
 class HomeService {
@@ -55,7 +56,7 @@ class HomeService {
     }
 
     /**
-     * Retrieves the last three image urls as the current sliders
+     * Retrieves the current slider images
      */
     getCurrentSliders() {
         return new Slider()
@@ -75,21 +76,21 @@ class HomeService {
     }
 
     /**
-     * Retrieves the last three image urls as the current sliders
+     * Retrieves the current body images
      */
-    getCurrentSliders() {
-        return new Slider()
+    getCurrentBodyImages() {
+        return new BodyImage()
             .fetchAll()
             .then(collections => {
-                let sliders = {};
+                let images = {};
                 for (let item of collections.models) {
-                    sliders[item.attributes.id] = item.attributes;
+                    images[item.attributes.id] = item.attributes;
                 }
-                this.logger.info('Current sliders fetched successfully');
-                return sliders;
+                this.logger.info('Current body images fetched successfully');
+                return images;
             })
             .catch(err => {
-                this.logger.error('Failed to fetch current sliders: ' + err);
+                this.logger.error('Failed to fetch current body images: ' + err);
                 throw err;
             })
     }
