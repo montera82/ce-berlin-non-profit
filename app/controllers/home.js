@@ -80,7 +80,7 @@ class HomeController {
         if (req.query.hasOwnProperty('id')) {
             viewData.imageId = req.query.id;
         }
-        viewData.sliders = this.homeService.getCurrentSliders()
+        viewData.sliders = this.homeService.getCurrentBodyImages()
             .then(images => {
                 viewData.images = images;
                 res.render('admin_upload_body_image', { viewData, layout: 'admin_main' });

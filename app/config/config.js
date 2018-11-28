@@ -25,16 +25,30 @@ let config = {
             min: (process.env.DATABASE_POOL_MIN) ? parseInt(process.env.DATABASE_POOL_MIN) : 2,
             max: (process.env.DATABASE_POOL_MAX) ? parseInt(process.env.DATABASE_POOL_MAX) : 2
         }
-    }, 
+    },
     pagination: {
         default_limit: 10,
         default_offset: 0,
         max_limit: 50
     },
-    seedImages: {
-        image_url_1:'/sliders/placeholder_image_1.jpg',
-        image_url_2:'/sliders/placeholder_image_2.png',
-        image_url_3:'/sliders/placeholder_image_3.jpg'
+    seedSliderImages: {
+        image_url_1: '/sliders/placeholder_image_1.jpg',
+        image_url_2: '/sliders/placeholder_image_2.png',
+        image_url_3: '/sliders/placeholder_image_3.jpg'
+    },
+    seedBodyImages: {
+        image_url: {
+            1: '/sliders/placeholder_image_1.jpg',
+            2: '/sliders/placeholder_image_2.png'
+        },
+        display_text: {
+            1: 'We provide branding & marketing services mostly as digital solutions to match the reality of web design, development & branding. Our clients\' trust proves that we chose the right path when we began to offer these services.',
+            2: 'We provide branding & marketing services mostly as digital solutions to match the reality of web design, development & branding. Our clients\' trust proves that we chose the right path when we began to offer these services.',
+        },
+        learn_more_url: {
+            1: 'https://learn_more.org',
+            2: 'https://learn_more.org'
+        }
     }
 };
 
