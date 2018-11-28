@@ -1,5 +1,5 @@
 
-const seedImages = require('./app/config/config').seedImages;
+const seedImages = require('../app/config/config').seedImages;
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
