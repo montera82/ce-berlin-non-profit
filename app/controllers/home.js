@@ -35,6 +35,10 @@ class HomeController {
             });
     }
 
+    /**
+     * Returns kingspay view
+     *
+     */
     kingsPay(req, res) {
         let viewData = {
             menuActive: 'home'
@@ -69,21 +73,21 @@ class HomeController {
      * Returns view for changing body images
      *
      */
-    getChangeBodyImagesView() {
+    getChangeBodyImagesView(req, res) {
         let viewData = {
             menuActive: 'home'
         };
         if (req.query.hasOwnProperty('id')) {
-            viewData.sliderId = req.query.id;
+            viewData.imageId = req.query.id;
         }
         viewData.sliders = this.homeService.getCurrentSliders()
-            .then(sliders => {
-                viewData.sliders = sliders;
-                res.render('admin_upload_slider', { viewData, layout: 'admin_main' });
+            .then(images => {
+                viewData.images = images;
+                res.render('admin_upload_body_image', { viewData, layout: 'admin_main' });
             })
             .catch(err => {
-                req.flash('error', 'Unable to fetch current sliders');
-                res.render('admin_upload_slider', { layout: 'admin_main' });
+                req.flash('error', 'Unable to fetch current images');
+                res.render('admin_upload_body_image', { layout: 'admin_main' });
             });
     }
 
