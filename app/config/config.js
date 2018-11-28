@@ -30,6 +30,10 @@ let config = {
         default_limit: 10,
         default_offset: 0,
         max_limit: 50
+    },
+    seedImages: {
+        image_url_1:'/images/placeholder_1',
+        image_url_2:'/images/placeholder_2'
     }
 };
 

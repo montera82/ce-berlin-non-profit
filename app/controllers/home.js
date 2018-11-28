@@ -69,7 +69,7 @@ class HomeController {
      * Changes the slider images
      *
      */
-    ChangeSliderImage(req, res) {
+    ChangeSliderImages(req, res) {
 
         let viewData = {
             menuActive: 'home'
