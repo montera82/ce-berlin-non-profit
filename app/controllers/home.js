@@ -42,6 +42,13 @@ class HomeController {
         res.render('kings_pay', viewData);
     }
 
+    pcdlOnline(req, res) {
+        let viewData = {
+            menuActive: 'home'
+        };
+        res.render('pcdl_online', viewData);
+    }
+
     /**
      * Returns view for changing slider images
      *
