@@ -1,5 +1,9 @@
 
-const seedSliderImages = require('../app/config/config').seedSliderImages;
+const seedSliderImages = {
+  image_url_1: '/sliders/placeholder_image_1.jpg',
+  image_url_2: '/sliders/placeholder_image_2.png',
+  image_url_3: '/sliders/placeholder_image_3.jpg'
+}
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
