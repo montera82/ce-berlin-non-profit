@@ -30,25 +30,6 @@ let config = {
         default_limit: 10,
         default_offset: 0,
         max_limit: 50
-    },
-    seedSliderImages: {
-        image_url_1: '/sliders/placeholder_image_1.jpg',
-        image_url_2: '/sliders/placeholder_image_2.png',
-        image_url_3: '/sliders/placeholder_image_3.jpg'
-    },
-    seedBodyImages: {
-        image_url: {
-            1: '/body_images/placeholder_image_1.jpg',
-            2: '/body_images/placeholder_image_2.png'
-        },
-        display_text: {
-            1: 'We provide branding & marketing services mostly as digital solutions to match the reality of web design, development & branding. Our clients\' trust proves that we chose the right path when we began to offer these services.',
-            2: 'We provide branding & marketing services mostly as digital solutions to match the reality of web design, development & branding. Our clients\' trust proves that we chose the right path when we began to offer these services.',
-        },
-        learn_more_url: {
-            1: 'https://learn_more.org',
-            2: 'https://learn_more.org'
-        }
     }
 };
 
