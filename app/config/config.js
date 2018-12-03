@@ -25,7 +25,7 @@ let config = {
             min: (process.env.DATABASE_POOL_MIN) ? parseInt(process.env.DATABASE_POOL_MIN) : 2,
             max: (process.env.DATABASE_POOL_MAX) ? parseInt(process.env.DATABASE_POOL_MAX) : 2
         }
-    }, 
+    },
     pagination: {
         default_limit: 10,
         default_offset: 0,

@@ -35,6 +35,10 @@ class HomeController {
             });
     }
 
+    /**
+     * Returns kingspay view
+     *
+     */
     kingsPay(req, res) {
         let viewData = {
             menuActive: 'home'
@@ -73,10 +77,32 @@ class HomeController {
     }
 
     /**
+     * Returns view for changing body images
+     *
+     */
+    getChangeBodyImagesView(req, res) {
+        let viewData = {
+            menuActive: 'home'
+        };
+        if (req.query.hasOwnProperty('id')) {
+            viewData.imageId = req.query.id;
+        }
+        viewData.sliders = this.homeService.getCurrentBodyImages()
+            .then(images => {
+                viewData.images = images;
+                res.render('admin_upload_body_image', { viewData, layout: 'admin_main' });
+            })
+            .catch(err => {
+                req.flash('error', 'Unable to fetch current images');
+                res.render('admin_upload_body_image', { layout: 'admin_main' });
+            });
+    }
+
+    /**
      * Changes the slider images
      *
      */
-    ChangeSliderImage(req, res) {
+    ChangeSliderImages(req, res) {
 
         let viewData = {
             menuActive: 'home'
@@ -95,6 +121,34 @@ class HomeController {
                     default:
                         req.flash('error', 'Failed to upload sliders');
                         res.render('admin_upload_slider', { layout: 'admin_main' });
+                        break;
+                }
+            });
+    }
+
+    /**
+     * Changes the body images
+     *
+     */
+    ChangeBodyImages(req, res) {
+
+        let viewData = {
+            menuActive: 'home'
+        };
+        this.homeService.uploadBodyImages(req, res)
+            .then(images => {
+                viewData.images = images;
+                req.flash('success', 'Body image uploaded successfully');
+                res.render('admin_upload_body_image', { viewData, layout: 'admin_main' });
+            })
+            .catch(err => {
+                switch (err.constructor) {
+                    case errors.NoSliderSelected:
+                        res.redirect('/admin/change-body-images');
+                        break;
+                    default:
+                        req.flash('error', 'Failed to upload body image');
+                        res.render('admin_upload_body_image', { layout: 'admin_main' });
                         break;
                 }
             });
