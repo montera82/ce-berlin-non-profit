@@ -18,6 +18,8 @@ module.exports.setup = function setup(app, serviceLocator) {
     });
 
     app.get('/kings-pay', (req, res, next) => homeController.kingsPay(req, res, next));
+
+    app.get('/pcdl-online', (req, res, next) => homeController.pcdlOnline(req, res, next));
     
 
     //Admin Routes
