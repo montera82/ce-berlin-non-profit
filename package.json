@@ -4,9 +4,11 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "migrate": "knex migrate:latest",
-    "seed": "knex seed:run",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "hijack": "docker-compose exec app sh",
+    "migrate-up": "docker-compose exec app sh -c 'knex migrate:latest'",
+    "migrate-down": "docker-compose exec app sh -c 'knex migrate:rollback'",
+    "seed": "docker-compose exec app sh -c 'knex seed:run'"
   },
   "repository": {
     "type": "git",
